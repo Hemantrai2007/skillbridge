@@ -30,12 +30,12 @@
   input[type="password"] {
     width: 100%;
     height: 46px;
-    border: 1.5px solid #ddd;
+    border: 1.5px solid #7f7c7c;
     border-radius: 8px;
     padding: 0 14px;
     font-size: 0.95rem;
     color: #333;
-    background: #f9f9f9;
+    background: #e3d9d9;
     transition: border-color 0.2s, background 0.2s;
     outline: none;
   }
@@ -84,9 +84,9 @@
   .divider span { font-size: 0.8rem; color: #aaa; white-space: nowrap; }
  
   /* Social buttons */
-  .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+  .social-row { display: grid; grid-template-columns: 1fr ;  margin-bottom: 1.5rem; }
   .btn-social {
-    height: 44px; background: #fff; border: 1.5px solid #ddd;
+    height: 44px; background: #fff; border: 1.5px solid #2d2424;
     border-radius: 8px; display: flex; align-items: center; justify-content: center;
     gap: 8px; font-size: 0.9rem; font-weight: 600; color: #333;
     cursor: pointer; transition: background 0.15s, border-color 0.15s;

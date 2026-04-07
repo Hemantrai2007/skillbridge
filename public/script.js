@@ -1,3 +1,16 @@
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDtBgp4yi-N2RBKLKrLva1tKfH8XVthfwU",
+  authDomain: "skillbridge-6ffe4.firebaseapp.com",
+  projectId: "skillbridge-6ffe4",
+  storageBucket: "skillbridge-6ffe4.firebasestorage.app",
+  messagingSenderId: "191862685375",
+  appId: "1:191862685375:web:f15b7483312551f634900a",
+  measurementId: "G-03P7LRJ332"
+};
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
   const eyeOpenPath  = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
   const eyeClosedPath = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
  
@@ -112,6 +125,43 @@
 
   btn.disabled = false;
   btn.textContent = 'Create Account';
+}
+function signInWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  auth.signInWithPopup(provider)
+    .then(async (result) => {
+      const user = result.user;
+
+      console.log("Google success:", user); // ✅ CHECK THIS
+
+      try {
+        console.log("Sending to backend..."); // ✅ ADD THIS
+
+        const res = await fetch("http://localhost:3000/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: user.displayName,
+            email: user.email,
+            password: "google_auth"
+          })
+        });
+
+        const data = await res.text();
+        console.log("Backend response:", data); // ✅ ADD THIS
+
+      } catch (err) {
+        console.error("Fetch error:", err); // ✅ IMPORTANT
+      }
+
+      window.location.href = "requirement.html";
+    })
+    .catch((error) => {
+      console.error("Google error:", error);
+    });
 }
   function socialLogin(provider) {
     showToast(`Connecting to ${provider}…`, true);
