@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge Pro | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SkillBridge<span class="pro-tag">PRO</span></div>
+        <div class="nav-links">
+            <a href="#" class="active">My Matches</a>
+            <a href="#">Search</a>
+            <a href="#">Inbox</a>
+        </div>
+        <div class="nav-user">
+            <i class="fa-regular fa-bell"></i>
+            <div class="user-avatar">HR</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar-left">
+            <div class="card profile-mini">
+                <h3>Hemant Rai</h3>
+                <p>B.Tech CS Student</p>
+                <div class="badge">Verified</div>
+            </div>
+            <div class="filters">
+                <h4>Filters</h4>
+                <label><input type="checkbox" checked> Premium Matches</label>
+                <label><input type="checkbox"> Nearby (Delhi)</label>
+                <label><input type="checkbox"> Verified Profiles</label>
+            </div>
+        </aside>
+
+        <main id="match-feed">
+            <h2 class="section-title">New Matches for You</h2>
+            <div id="loader" class="loader">Calculating Compatibility...</div>
+            </main>
+
+        <aside class="sidebar-right">
+            <h4>Recently Viewed</h4>
+            <div id="recent-views">
+                <p class="empty-msg">No recent activity</p>
+            </div>
+            <div class="upgrade-banner">
+                <p>Get 2x Faster Matches</p>
+                <button>Upgrade to Pro</button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
