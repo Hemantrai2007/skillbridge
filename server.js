@@ -56,6 +56,42 @@ app.get('/api/matches/:id', (req, res) => {
 
     res.json(matches);
 });
+// Add this BELOW your users array
+
+// Signup API
+app.post('/signup', (req, res) => {
+    const { name, email, password } = req.body;
+
+    // Basic validation
+    if (!name || !email || !password) {
+        return res.status(400).send("All fields required");
+    }
+
+    // Check duplicate email (basic)
+    const existingUser = users.find(u => u.email === email);
+    if (existingUser) {
+        return res.status(400).send("User already exists");
+    }
+
+    // Create new user
+    const newUser = {
+        id: users.length + 1,
+        name,
+        email,
+        password,
+        teaches: [],
+        wants: [],
+        location: "",
+        bio: "",
+        verified: false
+    };
+
+    users.push(newUser);
+
+    console.log("New User:", newUser);
+
+    res.send("Signup successful!");
+});
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Advanced Server: http://localhost:${PORT}`));
