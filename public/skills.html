@@ -1,0 +1,191 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillBridge - Skills</title>
+    <link rel="stylesheet" href="skills.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="form-box">
+
+        <h2>Build Your Skill Exchange</h2>
+        <p class="subtitle">Tell us what you need and what you can offer</p>
+
+        <form>
+
+            
+            <div class="section">
+                <label>Skills You Need</label>
+                <select id="requiredSkill" onchange="checkOther('required')">
+                    <option value="">-- Select Required Skill --</option>
+
+                    <optgroup label="Programming">
+                        <option>C Programming</option>
+                        <option>C++</option>
+                        <option>Java</option>
+                        <option>Python</option>
+                        <option>JavaScript</option>
+                    </optgroup>
+
+                    <optgroup label="Core CS">
+                        <option>Data Structures</option>
+                        <option>Algorithms</option>
+                        <option>DBMS</option>
+                        <option>Operating Systems</option>
+                        <option>Computer Networks</option>
+                    </optgroup>
+
+                    <optgroup label="Emerging Tech">
+                        <option>AI</option>
+                        <option>Machine Learning</option>
+                        <option>Cybersecurity</option>
+                        <option>Cloud Computing</option>
+                        <option>Blockchain</option>
+                    </optgroup>
+
+                    <option value="other">Other</option>
+                </select>
+
+                <input type="text" id="requiredOther" placeholder="Enter required skill" style="display:none;">
+            </div>
+
+
+           
+            <div class="section">
+                <label>Skills You Offer</label>
+                <select id="offeredSkill" onchange="checkOther('offered')">
+                    <option value="">-- Select Offered Skill --</option>
+
+                    <optgroup label="Development">
+                        <option>Frontend Development</option>
+                        <option>Backend Development</option>
+                        <option>Full Stack Development</option>
+                    </optgroup>
+
+                    <optgroup label="Tools">
+                        <option>Git & GitHub</option>
+                        <option>Docker</option>
+                        <option>Linux</option>
+                    </optgroup>
+
+                    <optgroup label="Soft Skills">
+                        <option>Teaching</option>
+                        <option>Public Speaking</option>
+                        <option>Communication</option>
+                    </optgroup>
+
+                    <option value="other">Other</option>
+                </select>
+
+                <input type="text" id="offeredOther" placeholder="Enter offered skill" style="display:none;">
+            </div>
+
+            <button type="submit">Find Matches</button>
+
+        </form>
+    </div>
+</div>
+
+<script>
+function checkOther(type) {
+    if (type === 'required') {
+        const select = document.getElementById("requiredSkill");
+        const input = document.getElementById("requiredOther");
+        input.style.display = select.value === "other" ? "block" : "none";
+    }
+
+    if (type === 'offered') {
+        const select = document.getElementById("offeredSkill");
+        const input = document.getElementById("offeredOther");
+        input.style.display = select.value === "other" ? "block" : "none";
+    }
+}
+</script>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SkillBridge - Skills</title>
+    <link rel="stylesheet" href="skillss.css">
+</head>
+<body>
+
+<div class="main-container">
+
+    <!-- LEFT (FORM) -->
+    <div class="left-section">
+        <h1 class="logo">SkillBridge</h1>
+        <p class="tagline">Build your skill exchange</p>
+
+        <form>
+
+            <!-- REQUIRED -->
+            <label>Skills You Need</label>
+            <select id="requiredSkill" onchange="checkOther('required')">
+                <option value="">Select Required Skill</option>
+                <option>C Programming</option>
+                <option>Java</option>
+                <option>Python</option>
+                <option>Data Structures</option>
+                <option>Machine Learning</option>
+                <option>Cybersecurity</option>
+                <option value="other">Other</option>
+            </select>
+
+            <input type="text" id="requiredOther" placeholder="Enter required skill">
+
+
+            <!-- OFFERED -->
+            <label>Skills You Offer</label>
+            <select id="offeredSkill" onchange="checkOther('offered')">
+                <option value="">Select Offered Skill</option>
+                <option>Frontend Development</option>
+                <option>Backend Development</option>
+                <option>Full Stack</option>
+                <option>Teaching</option>
+                <option>Public Speaking</option>
+                <option value="other">Other</option>
+            </select>
+
+            <input type="text" id="offeredOther" placeholder="Enter offered skill">
+
+            <button type="submit">Find Matches</button>
+
+        </form>
+    </div>
+
+
+    <!-- RIGHT (IMAGE SIDE SAME AS SIGNUP) -->
+    <div class="right-section">
+        <div class="image-box">
+            <img src="https://static.vecteezy.com/system/resources/previews/052/940/989/non_2x/isometric-illustration-shows-students-engaging-with-online-education-platform-featuring-laptop-books-graduation-cap-scientific-elements-and-english-language-learning-resources-vector.jpg" alt="Skill Illustration">
+        </div>
+        <h2>Exchange skills, not money</h2>
+        <p>Find people who need your skills and trade what you know.</p>
+    </div>
+
+</div>
+
+<script>
+function checkOther(type) {
+    if (type === 'required') {
+        let val = document.getElementById("requiredSkill").value;
+        document.getElementById("requiredOther").style.display = val === "other" ? "block" : "none";
+    }
+
+    if (type === 'offered') {
+        let val = document.getElementById("offeredSkill").value;
+        document.getElementById("offeredOther").style.display = val === "other" ? "block" : "none";
+    }
+}
+</script>
+
+</body>
+</html>
