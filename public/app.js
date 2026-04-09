@@ -41,4 +41,21 @@ function sendInterest(btn, name) {
     alert(`Success! We have notified ${name} of your interest.`);
 }
 
+// Function to handle the search
+function handleSearch() {
+    const query = document.getElementById('pc-search-input').value.toLowerCase();
+    const cards = document.querySelectorAll('.profile-card');
+
+    cards.forEach(card => {
+        const content = card.innerText.toLowerCase();
+        // Simple logic: if text exists in card, show it; otherwise hide it.
+        card.style.display = content.includes(query) ? 'flex' : 'none';
+    });
+}
+
+// Optional: Search as you type (Real-time)
+document.getElementById('pc-search-input').addEventListener('keyup', (e) => {
+    handleSearch();
+});
+
 document.addEventListener('DOMContentLoaded', loadMatches);
