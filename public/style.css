@@ -27,3 +27,49 @@ body { font-family: 'Segoe UI', sans-serif; background: var(--gray); margin: 0; 
 .sidebar-left, .sidebar-right { height: fit-content; }
 .filters h4 { margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
 .filters label { display: block; margin-bottom: 10px; font-size: 14px; cursor: pointer; }
+
+/* Centered Search Bar Styling */
+.nav-search-bar {
+    flex: 0 1 400px; /* Limits width to 400px but keeps it flexible */
+    display: flex;
+    background: #f0f2f5;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 2px 5px 2px 15px;
+    margin: 0 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.nav-search-bar:focus-within {
+    background: #fff;
+    box-shadow: 0 0 8px rgba(217, 36, 61, 0.15);
+    border-color: var(--primary);
+}
+
+.nav-search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 0;
+}
+
+.search-btn-inner {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    transition: 0.3s;
+}
+
+.search-btn-inner:hover {
+    background: #b81d32; /* Darker red on hover */
+}
