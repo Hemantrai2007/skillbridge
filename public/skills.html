@@ -10,7 +10,7 @@
 
 <!-- LEFT PANEL -->
 <div class="left">
-
+  <h2 id="welcomeText"></h2>
   <div class="brand">
     <h1>SkillBridge</h1>
     <p>Build your skill exchange</p>
@@ -84,7 +84,7 @@
         <input type="text" id="otherInput" placeholder="Enter your skill (e.g., DevOps, AR/VR)" style="display:none; margin-top:10px;">
 
     </div>
-    <button type="submit" class="btn-submit">Find Matches</button>
+    <button type="button" class="btn-submit" onclick="saveSkills()">Find Matches</button>
   </form>
 </div>
 
@@ -98,6 +98,14 @@
 </div>
 
 <script>
+window.onload = function () {
+    const name = localStorage.getItem("userName");
+
+    if (name) {
+        document.getElementById("welcomeText").innerText = "Welcome, " + name;
+    }
+};
+
 function checkOther(type) {
     if (type === 'required') {
         let val = document.getElementById("requiredSkill").value;
@@ -109,21 +117,9 @@ function checkOther(type) {
     }
 }
 
-let selectedSkills = [];
-
-function toggleSkill(element) {
-    const skill = element.innerText;
-    element.classList.toggle("active");
-    if (selectedSkills.includes(skill)) {
-        selectedSkills = selectedSkills.filter(s => s !== skill);
-    } else {
-        selectedSkills.push(skill);
-    }
-    console.log(selectedSkills); // debug
-}
-
 function toggleDropdown() {
     document.getElementById("checkboxList").classList.toggle("show");
+    
 }
 
 const otherCheck = document.getElementById("otherCheck");
@@ -140,6 +136,25 @@ otherCheck.addEventListener("change", function () {
         otherInput.style.display = "none";
     }
 });
+
+function saveSkills() {
+
+    const required = document.querySelector('input[name="requiredSkill"]:checked');
+    const requiredValue = required ? required.nextElementSibling.innerText : "";
+
+    const offered = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
+    let offeredValues = [];
+
+    offered.forEach(skill => {
+        offeredValues.push(skill.nextElementSibling.innerText);
+    });
+
+    localStorage.setItem("requiredSkill", requiredValue);
+    localStorage.setItem("offeredSkills", JSON.stringify(offeredValues));
+
+
+    alert("Skills saved successfully!");
+}
 </script>
 </body>
 </html>

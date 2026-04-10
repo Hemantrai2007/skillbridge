@@ -2,19 +2,19 @@
 *, *::before, *::after {box-sizing: border-box; margin: 0; padding: 0;}
 
 body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  height: 100vh; display: flex; overflow: hidden;}
+  height: 105vh; display: flex; overflow: visible;}
 
 /* ── Layout Panels ── */
-.left, .right {height: 100vh; display: flex; flex-direction: column;}
+.left, .right {height: 105vh; display: flex; flex-direction: column;}
 
-.left {flex: 1; justify-content: center; padding: 3rem 4rem; background: #fff; max-width: 40%;}
+.left {flex: 1; justify-content: top; padding: 8rem 4rem; background: #fff; max-width: 40%;}
 
 .right {flex: 1; background: #fdecea; align-items: center; justify-content: center;
   padding: 3rem 2rem; text-align: center;}
 
 /* ── Typography & Brand ── */
 .brand { margin-bottom: 2rem; }
-.brand h1 { font-size: 4rem; font-weight: 700; color: #e53935; letter-spacing: -0.5px; }
+.brand h1 { font-size: 3.5rem; font-weight: 700; color: #e53935; letter-spacing: -0.5px; }
 .brand p { font-size: 0.95rem; color: #666; margin-top: 4px; }
 
 .right h2 { font-size: 1.6rem; font-weight: 700; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.3; }
@@ -25,39 +25,22 @@ body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
 label {display: block; font-size: 0.875rem; font-weight: 600; color: #222; margin-bottom: 6px;}
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
 select,
-.dropdown {width: 100%; height: 46px; border: 1.5px solid #7f7c7c; border-radius: 8px; padding: 0 14px;
+.dropdown {width: 100%; height: 43px; border: 1.5px solid #7f7c7c; border-radius: 8px; padding: 0 14px;
   font-size: 0.95rem; color: #333; background: #e3d9d9; transition: border-color 0.2s, background 0.2s;
   outline: none}
 
-input:focus, select:focus {border-color: #e53935; background: #fff;}
-
-/* ── Password Specifics ── */
-.password-wrap { position: relative; }
-.password-wrap input { padding-right: 44px; }
-
-.toggle-pw {position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-  background: none; border: none; cursor: pointer; color: #999; padding: 4px;}
-
-
-/* ── Skills & Custom Selects ── */
-.skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-
-.skill {padding: 10px 14px; border: 1.5px solid #7f7c7c; border-radius: 8px; background: #e3d9d9;
-  cursor: pointer; transition: 0.3s;}
-
-.skill:hover, .skill.active {background: #e53935; color: white;}
+input:focus, select:focus {border-color: #e53935; background: #fff; box-shadow: 0 0 6px rgba(239, 87, 165, 0.5);}
 
 .select-box {border: 1px solid #ccc; padding: 10px; border-radius: 8px; background: #f1f1f1;
   cursor: pointer;}
 
-.multi-select { position: relative; }
+.multi-select { position: relative; border: 1px solid #ccc; border-radius: 8px; transition: 0.3s;}
+
+.multi-select:focus-within {border-color: #e53935; box-shadow: 0 0 6px rgba(239, 87, 165, 0.5);}
 
 .checkbox-list {display: none; position: absolute; width: 100%; background: white; border: 1px solid #ccc;
-  border-radius: 8px; max-height: 200px; overflow-y: auto;margin-top: 5px; z-index: 10;}
+  border-radius: 8px; max-height: 215px; overflow-y: auto;margin-top: 5px; z-index: 10;}
 
 .show { display: block; }
 
@@ -83,8 +66,9 @@ input:focus, select:focus {border-color: #e53935; background: #fff;}
 #otherInput {display: none; width: 100%; margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid #ccc;}
 
 
-.right img { width: min(420px, 100%); border-radius: 16px; margin-bottom: 2rem; object-fit: cover; }
+.right img { width: min(400px, 100%); border-radius: 16px; margin-bottom: 2rem; object-fit: cover; box-shadow: 0 5px 20px rgba(231, 59, 128, 0.614); }
 .hidden-input { display: none; }
+
 
 @media (max-width: 860px) {
   .right { display: none; }
