@@ -91,41 +91,39 @@ const firebaseConfig = {
   btn.textContent = 'Creating account…';
 
   try {
-    const res = await fetch("http://localhost:3000/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: pw
-      })
-    });
+  const res = await fetch("http://localhost:3000/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      password: pw
+    })
+  });
 
-    const data = await res.text();
+  const data = await res.text();
 
-    showToast(data, true);
-
-    // Clear form
-    document.getElementById('fullName').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('password').value = '';
-    document.getElementById('terms').checked = false;
-
-    // Redirect to next step
-    setTimeout(() => {
-      window.location.href = "requirement.html";
-    }, 1000);
-
-  } catch (err) {
-    console.error(err);
-    showToast("Server error! Try again.", false);
+  if (!res.ok) {
+    showToast(data || "Signup failed", false);
+    return;
   }
 
-  btn.disabled = false;
-  btn.textContent = 'Create Account';
+  localStorage.setItem("userName", name);
+  localStorage.setItem("userEmail", email);
+
+  showToast("Account created successfully!", true);
+
+  setTimeout(() => {
+    window.location.href = "skills.html"; 
+  }, 1000);
+
+} catch (err) {
+  console.error(err);
+  showToast("Server error! Try again.", false);
 }
+
 function signInWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
 
