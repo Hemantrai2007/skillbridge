@@ -155,7 +155,7 @@ function signInWithGoogle() {
         console.error("Fetch error:", err); // ✅ IMPORTANT
       }
 
-      window.location.href = "requirement.html";
+      window.location.href = "skills.html";
     })
     .catch((error) => {
       console.error("Google error:", error);
@@ -171,4 +171,4 @@ function signInWithGoogle() {
       const errMap = { fullName: 'nameError', email: 'emailError', password: 'passwordError' };
       showError(errMap[id], false);
     });
-  });
+  })}
