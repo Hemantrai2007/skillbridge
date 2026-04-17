@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkillBridge – Log In</title>
+<link rel="stylesheet" href="signin.css">
+</head>
+
+<body>
+
+<!-- LEFT -->
+<div class="left">
+
+<div class="brand">
+<h1>SkillBridge</h1>
+<p>Sign in your account and start learning</p>
+</div>
+
+<div class="form-group">
+<label>Email Address</label>
+<input type="email" id="loginEmail" autocomplete="off">
+<div class="field-error" id="mailError">Please enter your emailId.</div>
+</div>
+
+<div class="form-group">
+<label>Password</label>
+
+<div class="password-wrap">
+<input type="password" id="password" autocomplete="new-password">
+<button class="toggle-pw" id="togglePw" type="button">
+<svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+<circle cx="12" cy="12" r="3"/>
+</svg>
+</button>
+</div>
+
+<div class="field-error" id="passwordError">Please enter the password</div>
+</div>
+
+<div class="password-row">
+<div class="hint">Must be at least 8 characters</div>
+<a href="#" id="openModal" class="forgot-link">Forgot password?</a>
+</div>
+
+<button class="btn-submit" onclick = "handleSubmit()">Log In</button>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+<img src="https://static.vecteezy.com/system/resources/previews/052/940/989/non_2x/isometric-illustration-shows-students-engaging-with-online-education-platform-featuring-laptop-books-graduation-cap-scientific-elements-and-english-language-learning-resources-vector.jpg">
+<h1>Bridge the gap between<br> skills and success</h1>
+<p>Join thousands of learners who are already mastering<br> new skills and advancing their careers with SkillBridge.</p>
+</div>
+
+<!-- POPUP -->
+<div class="modal" id="modal">
+<div class="inner_modal">
+
+<h2>SkillBridge</h2>
+<p class="subtitle">Enter your email to receive OTP</p>
+
+<div id="successMsg">OTP sent successfully!</div>
+
+<label id="emailLabel">Email Address</label>
+<input type="email" id="emailpop">
+
+<div class="field-error" id="emailError">Invalid Email</div>
+
+<label id="otpLabel" style="display:none;">Enter OTP</label>
+<input type="text" id="otp" style="display:none;">
+
+<div class="field-error" id="otpError">Wrong OTP</div>
+
+<button id="closeModal" disabled>Send OTP</button>
+
+<div class="divider">or</div>
+
+<div style="text-align:center">
+<a href="#" id="cancelLink" class="forgot-link">Back to Login</a>
+</div>
+
+</div>
+</div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Replace ONLY the <script> section of your merged file with this -->
+<script>
+/* ===============================
+   DOM ELEMENTS
+=================================*/
+const modal = document.getElementById("modal");
+const openBtn = document.getElementById("openModal");
+const cancelLink = document.getElementById("cancelLink");
+const sendBtn = document.getElementById("closeModal");
+
+const emailInput = document.getElementById("emailpop");
+const otpInput = document.getElementById("otp");
+
+const emailError = document.getElementById("emailError");
+const otpError = document.getElementById("otpError");
+
+const otpLabel = document.getElementById("otpLabel");
+const emailLabel = document.getElementById("emailLabel");
+
+const successMsg = document.getElementById("successMsg");
+
+const loginEmail = document.getElementById("loginEmail");
+const loginPassword = document.getElementById("password");
+
+/* ===============================
+   VARIABLES
+=================================*/
+let Mode = 1;
+let savedEmail = "";
+let OTP = "";
+
+/* ===============================
+   HELPERS
+=================================*/
+function validEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function showError(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = show ? 'block' : 'none';
+}
+
+function setFieldError(inputId, hasError) {
+  const el = document.getElementById(inputId);
+  if (el) {
+    if (hasError) el.classList.add('error'); else el.classList.remove('error');
+  }
+}
+
+function showToast(msg, success = true) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = success ? '#2e7d32' : '#c62828';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+function clearErrors() {
+  emailError.classList.remove("visible");
+  otpError.classList.remove("visible");
+
+  emailError.style.display = "none";
+  otpError.style.display = "none";
+}
+
+function showSuccess(msg) {
+  successMsg.style.display = "block";
+  successMsg.innerText = msg;
+}
+
+function hideSuccess() {
+  successMsg.style.display = "none";
+}
+
+function updateBtn() {
+  let valid = false;
+
+  if (Mode === 1) {
+    valid = validEmail(emailInput.value.trim());
+  }
+
+  else if (Mode === 2) {
+    valid = otpInput.value.trim().length === 4;
+  }
+
+  else if (Mode === 3) {
+    const p1 = emailInput.value.trim();
+    const p2 = otpInput.value.trim();
+
+    valid = p1.length >= 8 && p1 === p2;
+  }
+
+  sendBtn.disabled = !valid;
+
+  if (valid) {
+    sendBtn.classList.add("active");
+  } else {
+    sendBtn.classList.remove("active");
+  }
+}
+
+/* ===============================
+   LIVE INPUT EVENTS
+=================================*/
+emailInput.addEventListener("input", () => {
+  clearErrors();
+  hideSuccess();
+  updateBtn();
+});
+
+otpInput.addEventListener("input", () => {
+  clearErrors();
+  updateBtn();
+});
+
+loginEmail.addEventListener("input", () => {
+  showError('mailError', false);
+  setFieldError('loginEmail', false);
+});
+
+loginPassword.addEventListener("input", () => {
+  showError('passwordError', false);
+  setFieldError('password', false);
+});
+
+/* ===============================
+   OPEN / CLOSE POPUP
+=================================*/
+openBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  modal.classList.add("open");
+});
+
+cancelLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  resetPopup();
+});
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    resetPopup();
+  }
+});
+
+/* ===============================
+   RESET POPUP
+=================================*/
+function resetPopup() {
+  modal.classList.remove("open");
+
+  Mode = 1;
+  OTP = "";
+  savedEmail = "";
+
+  emailInput.type = "email";
+  otpInput.type = "text";
+
+  emailInput.value = "";
+  otpInput.value = "";
+
+  emailInput.placeholder = "Enter your email";
+  otpInput.placeholder = "Enter OTP";
+
+  emailLabel.innerText = "Email Address";
+  otpLabel.innerText = "Enter OTP";
+
+  otpInput.style.display = "none";
+  otpLabel.style.display = "none";
+
+  sendBtn.innerText = "Send OTP";
+
+  clearErrors();
+  hideSuccess();
+  updateBtn();
+}
+
+/* ===============================
+   LOGIN API
+=================================*/
+async function handleSubmit() {
+  const email = loginEmail.value.trim();
+  const password = loginPassword.value.trim();
+
+  const emailErr = !validEmail(email);
+  const pwErr = password.length < 8;
+
+  showError('mailError', emailErr);
+  setFieldError('loginEmail', emailErr);
+
+  showError('passwordError', pwErr);
+  setFieldError('password', pwErr);
+
+  if (emailErr || pwErr) return;
+
+  const btn = document.querySelector('.btn-submit');
+  btn.disabled = true;
+
+  try {
+    const response = await fetch("http://localhost:8000/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      showToast("Login Success", true);
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 1500);
+    } else {
+      showToast(data.message || "Invalid Credentials", false);
+      const passErr = document.getElementById('passwordError');
+      if (passErr) {
+        passErr.innerText = data.message || "Invalid Credentials";
+        showError('passwordError', true);
+      }
+      setFieldError('password', true);
+    }
+
+  } catch (error) {
+    showToast("Server Error", false);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ===============================
+   FORGOT PASSWORD FLOW
+=================================*/
+sendBtn.addEventListener("click", async () => {
+
+  /* STEP 1 SEND OTP */
+  if (Mode === 1) {
+
+    const email = emailInput.value.trim();
+
+    if (!validEmail(email)) {
+      emailError.style.display = "block";
+      emailError.innerText = "Enter valid email";
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8000/auth/check-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+
+        savedEmail = email;
+
+        showSuccess("OTP sent successfully");
+
+        otpInput.style.display = "block";
+        otpLabel.style.display = "block";
+
+        sendBtn.innerText = "Verify OTP";
+
+        Mode = 2;
+        updateBtn();
+
+      } else {
+        emailError.style.display = "block";
+        emailError.innerText = "Email not registered";
+      }
+
+    } catch (error) {
+      emailError.style.display = "block";
+      emailError.innerText = "Server error";
+    }
+  }
+
+  /* STEP 2 VERIFY OTP */
+  else if (Mode === 2) {
+
+    const otp = otpInput.value.trim();
+
+    if (otp.length !== 4) {
+      otpError.style.display = "block";
+      otpError.innerText = "Enter valid OTP";
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8000/auth/verify_otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: savedEmail,
+          otp: otp
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+
+        OTP = otp;
+
+        hideSuccess();
+
+        emailLabel.innerText = "New Password";
+        otpLabel.innerText = "Confirm Password";
+
+        emailInput.type = "password";
+        otpInput.type = "password";
+
+        emailInput.value = "";
+        otpInput.value = "";
+
+        emailInput.placeholder = "Enter password";
+        otpInput.placeholder = "Confirm password";
+
+        sendBtn.innerText = "Reset Password";
+
+        Mode = 3;
+        updateBtn();
+
+      } else {
+        otpError.style.display = "block";
+        otpError.innerText = "Wrong OTP";
+      }
+
+    } catch (error) {
+      otpError.style.display = "block";
+      otpError.innerText = "Server error";
+    }
+  }
+
+  /* STEP 3 RESET PASSWORD */
+  else if (Mode === 3) {
+
+    const new_password = emailInput.value.trim();
+    const confirm_password = otpInput.value.trim();
+
+    if (new_password.length < 8) {
+      emailError.style.display = "block";
+      emailError.innerText = "Minimum 8 characters required";
+      return;
+    }
+
+    if (new_password !== confirm_password) {
+      otpError.style.display = "block";
+      otpError.innerText = "Passwords do not match";
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8000/auth/reset_password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: savedEmail,
+          OTP: OTP,
+          new_password: new_password
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        showToast("Password Reset Successful", true);
+        resetPopup();
+      } else {
+        otpError.style.display = "block";
+        otpError.innerText = data.message || "Cannot reset password";
+      }
+
+    } catch (error) {
+      otpError.style.display = "block";
+      otpError.innerText = "Server error";
+    }
+  }
+
+});
+
+/* ===============================
+   SHOW / HIDE PASSWORD
+=================================*/
+document.getElementById("togglePw").addEventListener("click", () => {
+  const pass = document.getElementById("password");
+
+  if (pass.type === "password") {
+    pass.type = "text";
+  } else {
+    pass.type = "password";
+  }
+});
+</script>
+
+</body>
+</html>
