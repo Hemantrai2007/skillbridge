@@ -1,16 +1,28 @@
 {
   "name": "skill-bridge-project",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "express": "^5.2.1"
-  }
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hemantrai2007/skillbridge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hemantrai2007/skillbridge/issues"
+  },
+  "homepage": "https://github.com/Hemantrai2007/skillbridge#readme",
+  "description": ""
 }
