@@ -120,4 +120,4 @@
       const errMap = { fullName: 'nameError', email: 'emailError', password: 'passwordError' };
       showError(errMap[id], false);
     });
-  });
+  })}
