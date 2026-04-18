@@ -24,7 +24,7 @@
   .brand h1 { font-size: 3.5rem; font-weight: 700; color: #e53935; letter-spacing: -0.5px; }
   .brand p  { font-size: 0.95rem; color: #666; margin-top: 4px; }
  
-  .form-group { margin-bottom: 1.25rem; }
+  .form-group { margin-bottom: 1.25rem; margin-top:0%;}
   label { display: block; font-size: 0.875rem; font-weight: 600; color: #222; margin-bottom: 6px; }
  
   input[type="text"],

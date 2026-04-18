@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge Pro | My Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="side-nav">
+        <div class="side-nav-top">
+            <div class="nav-profile-circle active" title="My Profile">HR</div>
+            <hr class="nav-divider">
+            <a href="index.html" class="nav-item" id="nav-matches" title="Matches">
+                <i class="fa-solid fa-layer-group"></i>
+            </a>
+            <a href="chat.html" class="nav-item" id="nav-inbox" title="Inbox">
+                <i class="fa-solid fa-message"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="logo">SkillBridge</div>
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="pc-search-input" placeholder="Search skills (e.g. Python, Node.js)...">
+            </div>
+            <div class="top-bar-actions">
+                <div class="notification-wrapper">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="pulse-dot"></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <aside class="sidebar-left">
+                <div class="card profile-mini">
+                    <h3 style="margin:0;">Hemant Rai</h3>
+                    <p style="color:#666; font-size:14px;">B.Tech CS Student</p>
+                    <div class="badge">Verified</div>
+                </div>
+            </aside>
+
+            <main id="main-content-area">
+                <section id="profile-view">
+                    <h2 class="section-title">My Personal Profile</h2>
+                    <div class="profile-header-card">
+                        <div class="profile-cover"></div>
+                        <div class="profile-main-info">
+                            <div class="large-profile-circle">HR</div>
+                            <div class="profile-text-details">
+                                <h1>Hemant Rai</h1>
+                                <p><i class="fa-solid fa-university"></i> B.Tech Computer Science | DSEU Delhi</p>
+                                <div class="profile-badges">
+                                    <span class="badge-verified"><i class="fa-solid fa-check-double"></i> Verified Expert</span>
+                                    <span class="badge-pro">PRO Member</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-grid">
+                        <div class="profile-info-card">
+                            <h3><i class="fa-solid fa-award"></i> Skills I Teach</h3>
+                            <div class="tag-list">
+                                <span class="profile-tag">React.js</span>
+                                <span class="profile-tag">Node.js</span>
+                                <span class="profile-tag">Arduino Robotics</span>
+                                <span class="profile-tag">C++ Programming</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-card">
+                            <h3><i class="fa-solid fa-lightbulb"></i> What I want to Learn</h3>
+                            <div class="tag-list">
+                                <span class="profile-tag learn">Python ML</span>
+                                <span class="profile-tag learn">UI/UX Design</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-card full-width">
+                            <h3><i class="fa-solid fa-user-astronaut"></i> About Me</h3>
+                            <p>I am a passionate CS student focused on bridging the gap between hardware (Robotics) and software (Full-stack Web Dev). Currently building SkillBridge Pro to help students trade knowledge.</p>
+                        </div>
+                    </div>
+                    <button id="edit-profile-btn" class="btn-upgrade" style="margin-top: 20px;">Edit Profile</button>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>
