@@ -53,7 +53,7 @@
     <label>Skills You Offer</label>
     <div class="multi-select">
 
-        <div class="select-box" onclick="toggleDropdown()">
+        <div class="select-box" id="selectBoxText" onclick="toggleDropdown()">
             Select your skills
         </div>
 
@@ -77,7 +77,7 @@
             <label><input type="checkbox" value="API"><span>API Development</span></label>
             <label><input type="checkbox" value="Blockchain"><span>Blockchain</span></label>
             <label><input type="checkbox" value="UI/UX"><span>UI/UX Design</span></label>
-            <label><input type="checkbox" id="otherCheck" onclick="toggleOtherInput()"> Other</label>
+            <label><input type="checkbox" id="otherCheck" onclick="toggleOtherInput()"><span>Other</span></label>
             
         </div>
         <!-- Hidden Input -->
@@ -136,6 +136,36 @@ otherCheck.addEventListener("change", function () {
         otherInput.style.display = "none";
     }
 });
+
+const selectBoxText = document.getElementById("selectBoxText");
+const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
+
+checkboxes.forEach(box => {
+    box.addEventListener("change", updateSelectedSkills);
+});
+
+function updateSelectedSkills() {
+    let selected = [];
+
+    checkboxes.forEach(box => {
+        if (box.checked && box.nextElementSibling) {
+            selected.push(box.nextElementSibling.innerText);
+        }
+    });
+
+    if (selected.length === 0) {
+        selectBoxText.innerText = "Select your skills";
+    } 
+    else if (selected.length <= 3) {
+        selectBoxText.innerText = selected.join(", ");
+    } 
+    else {
+        let firstThree = selected.slice(0, 3).join(", ");
+        let remaining = selected.length - 3;
+
+        selectBoxText.innerText = `${firstThree} +${remaining} more`;
+    }
+}
 
 function saveSkills() {
 
