@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pop up</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    /* ── Overlay ── */
+    .modal {
+      opacity: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(227, 30, 89);
+      transition: opacity 0.3s ease-in-out;
+      z-index: -1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.open {
+      opacity: 1;
+      z-index: 999;
+    }
+
+    /* ── Card (DSEU style) ── */
+    .inner_modal {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+      padding: 2rem 2rem 1.75rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    /* ── Heading ── */
+    h2 {
+      font-size: 30px;
+      font-weight: bold;
+      color: #e53935;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Label ── */
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    /* ── Input ── */
+    input[type="email"],
+    input[type="text"] {
+      width: 100%;
+      height: 44px;
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      padding: 0 13px;
+      font-size: 0.95rem;
+      color: #333;
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      margin-bottom: 6px;
+    }
+
+    input[type="email"]:focus {
+      border-color: #1a7fcf;
+      box-shadow: 0 0 0 3px rgba(26, 127, 207, 0.12);
+    }
+
+    /* ── Field error ── */
+    .field-error {
+      display: none;
+      font-size: 12px;
+      color: #A32D2D;
+      text-align: left;
+      margin-bottom: 12px;
+    }
+
+    .field-error.visible {
+      display: block;
+    }
+
+    /* ── Send OTP button ── */
+    #closeModal {
+      width: 100%;
+      height: 44px;
+      background: #e0e0e0;
+      color: #999;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: not-allowed;
+      transition: background 0.2s, color 0.2s, transform 0.1s;
+      margin-top: 10px;
+    }
+
+    #closeModal.active {
+      background: #e53935;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    #closeModal.active:hover {
+      background: #d93230;
+    }
+
+    #closeModal.active:active {
+      transform: scale(0.99);
+    }
+
+    /* ── Success message ── */
+    #successMsg {
+      display: none;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      background: #eaf3de;
+      color: #3B6D11;
+      border: 1px solid #97C459;
+    }
+
+    /* ── Hint ── */
+    .hint {
+      font-size: 12px;
+      color: #888;
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 1.25rem 0 1rem;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: #e5e7eb;
+    }
+
+    .divider span {
+      font-size: 12px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="password-row">
+    <div class="hint">Must be at least 8 characters</div>
+    <a href="#" id="openModal" class="forgot-link">Forgot password?</a>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="inner_modal">
+
+      <h2>Skillbridge</h2>
+      <p class="subtitle">Enter your email to receive an OTP</p>
+
+      <div id="successMsg">OTP sent! Please check your inbox.</div>
+
+      <label for="email" id="emailLable">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" autocomplete="email">
+      <div class="field-error" id="emailError">Please enter a valid email address.</div>
+      <label for="text" id="otpLable" style="display:none">Enter OTP</label>
+      <input type="text" id="otp" placeholder="Enter your otp" style="display:none">
+      <div class="field-error" id="otpError" style="display:none">Please enter a valid otp.</div>
+
+      <button id="closeModal" disabled>Send OTP</button>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span>or</span>
+        <div class="divider-line"></div>
+      </div>
+
+      <div style="font-size:13px;color:#666;">
+        Remember your password?
+        <a href="#" id="cancelLink" style="color:#e53935;font-weight:500;text-decoration:none;">Back to Login</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById("openModal");
+    const sendBtn = document.getElementById("closeModal");
+    const modal = document.getElementById("modal");
+    const emailInput = document.getElementById("email");
+    const emailError = document.getElementById("emailError");
+    const successMsg = document.getElementById("successMsg");
+    const cancelLink = document.getElementById("cancelLink");
+    const otpError = document.getElementById("otpError");
+    const otpInput = document.getElementById("otp");
+    const otpLable = document.getElementById("otpLable");
+    const emailLable = document.getElementById("emailLable");
+
+    function isValidEmail(val) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    }
+    
+    let Mode = 1;
+    function updateBtn() {
+
+    let valid = false;
+
+    if (Mode === 1) {
+        valid = isValidEmail(emailInput.value.trim());
+    }
+
+    else if (Mode === 2) {
+        valid = otpInput.value.trim().length === 4;
+    }
+
+    else if (Mode === 3) {
+
+        const pass1 = emailInput.value.trim();
+        const pass2 = otpInput.value.trim();
+        
+        valid = pass1.length >= 8 && pass1 === pass2;
+        console.log(Mode,pass1,pass2,valid)
+    }
+
+    sendBtn.disabled = !valid;
+
+    if(valid){
+        sendBtn.classList.add("active");
+    } else {
+        sendBtn.classList.remove("active");
+    }
+}
+otpInput.addEventListener("input", updateBtn);
+
+    emailInput.addEventListener("input", () => {
+      emailError.classList.remove("visible");
+      successMsg.style.display = "none";
+      updateBtn();
+    });
+
+    emailInput.addEventListener("blur", () => {
+      if (emailInput.value.trim() && !isValidEmail(emailInput.value.trim())) {
+        emailError.classList.add("visible");
+      }
+    });
+
+    openBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      modal.classList.add("open");
+    });
+
+
+    let email ;
+    let OTP ;
+    sendBtn.addEventListener("click", async () => {
+
+      // STEP 1 SEND OTP
+      if (Mode === 1) {
+
+        email = emailInput.value;
+
+        if (!isValidEmail(email)) {
+          emailError.classList.add("visible");
+          emailError.innerText = "Enter valid email";
+          return;
+        }
+
+        const response = await fetch("http://localhost:8000/auth/check-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+
+          email = emailInput.value.trim();
+
+          successMsg.style.display = "block";
+
+
+          otpLable.style.display = "block";
+          otpInput.style.display = "block";
+
+          sendBtn.textContent = "Verify OTP";
+
+          Mode = 2;
+
+        } else {
+
+          emailError.classList.add("visible");
+          emailError.innerText = "Email not registered";
+        }
+
+      }
+
+      // STEP 2 VERIFY OTP
+      else if (Mode === 2) {
+        successMsg.style.display = "none";
+        const otp = otpInput.value.trim();
+        OTP = otp;
+
+        if (otp.length !== 4) {
+          otpError.style.display = "block";
+          otpError.innerText = "Enter valid OTP";
+          return;
+        }
+
+        const response = await fetch("http://localhost:8000/auth/verify_otp", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, otp })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          emailLable.textContent = "Enter password";
+          otpLable.textContent = "Confirm password";
+          emailInput.value = "";
+          otpInput.value = "";
+          emailInput.placeholder = "Enter password";
+          otpInput.placeholder = "Confirm password";
+          sendBtn.textContent = "Reset Password";
+          emailError.classList.remove("visible");
+          emailError.style.display = "none";
+          emailError.innerText = "";
+          otpError.style.display = "none";
+          Mode = 3;
+          updateBtn();
+        } else {
+          otpError.style.display = "block";
+          otpError.innerText = "Wrong OTP";
+        }
+
+      }
+      else if (Mode === 3) {
+        emailInput.type = "text";
+        const new_password = emailInput.value;
+        const confirm_password = otpInput.value;
+        if (new_password === confirm_password) {
+          const response = await fetch("http://localhost:8000/auth/reset_password", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, OTP, new_password })
+          });
+
+          const data = await response.json();
+          if (data.success) {
+            modal.classList.remove("open");
+            emailInput.value = "";
+            emailError.classList.remove("visible");
+            successMsg.style.display = "none";
+            sendBtn.disabled = true;
+            sendBtn.classList.remove("active");
+          }
+          else {
+            otpError.disabled = false;
+            otpError.textContent = "Can't Reset Password";
+          }
+        }
+      }
+
+    });
+
+    cancelLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      modal.classList.remove("open");
+      emailInput.value = "";
+      emailError.classList.remove("visible");
+      successMsg.style.display = "none";
+      sendBtn.textContent = "Send OTP";
+      sendBtn.disabled = true;
+      sendBtn.classList.remove("active");
+    });
+
+    // Close on backdrop click
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("open");
+      }
+    });
+
+
+
+  </script>
+</body>
+
+</html>

@@ -92,6 +92,27 @@ app.post('/signup', (req, res) => {
 
     res.send("Signup successful!");
 });
+app.post('/signin', (req, res) => {
+    const { email, password } = req.body;
+
+    // 🔍 1. Check if user exists
+    const user = users.find(u => u.email === email);
+
+    if (!user) {
+        return res.status(400).json({ message: "User not found" });
+    }
+
+    // 🔐 2. Check password
+    if (user.password !== password) {
+        return res.status(400).json({ message: "Invalid password" });
+    }
+
+    // ✅ 3. Success
+    res.json({
+        message: "Login successful",
+        user
+    });
+});
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Advanced Server: http://localhost:${PORT}`));
