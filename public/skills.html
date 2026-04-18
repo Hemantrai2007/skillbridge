@@ -67,7 +67,7 @@
             <label><input type="checkbox" value="Cybersecurity"><span>Cybersecurity</span></label>
             <label><input type="checkbox" value="Frontend"><span>Frontend Development</span></label>
             <label><input type="checkbox" value="Backend"><span>Backend Development</span></label>
-            <label><input type="checkbox" value="Full Stack"><span>Full Stack Development</span> </label>
+            <label><input type="checkbox" value="Full Stack"><span>Full Stack Development</span></label>
             <label><input type="checkbox" value="Cloud"><span>Cloud Computing</span></label>
             <label><input type="checkbox" value="DBMS"><span>Database Management Systems</span></label>
             <label><input type="checkbox" value="OS"><span>Operating Systems</span></label>
@@ -77,8 +77,7 @@
             <label><input type="checkbox" value="API"><span>API Development</span></label>
             <label><input type="checkbox" value="Blockchain"><span>Blockchain</span></label>
             <label><input type="checkbox" value="UI/UX"><span>UI/UX Design</span></label>
-            <label><input type="checkbox" id="otherCheck" onclick="toggleOtherInput()"><span>Other</span></label>
-            
+            <label><input type="checkbox" id="otherCheck" value="Other" onclick="toggleOtherInput()"><span>Other</span></label>
         </div>
         <!-- Hidden Input -->
         <input type="text" id="otherInput" placeholder="Enter your skill (e.g., DevOps, AR/VR)" style="display:none; margin-top:10px;">
@@ -167,24 +166,68 @@ function updateSelectedSkills() {
     }
 }
 
-function saveSkills() {
+async function saveSkills() {
+    const requiredValue =
+    document.getElementById("requiredSkill").value;
 
-    const required = document.querySelector('input[name="requiredSkill"]:checked');
-    const requiredValue = required ? required.nextElementSibling.innerText : "";
-
-    const offered = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
+    
+    if(requiredValue === "other"){
+        requiredValue =
+        document.getElementById("requiredOther").value.trim();
+}
+    const offered =
+      document.querySelectorAll(
+        '#checkboxList input[type="checkbox"]:checked'
+      );
     let offeredValues = [];
 
     offered.forEach(skill => {
-        offeredValues.push(skill.nextElementSibling.innerText);
+        offeredValues.push(
+          skill.value
+        );
     });
 
-    localStorage.setItem("requiredSkill", requiredValue);
-    localStorage.setItem("offeredSkills", JSON.stringify(offeredValues));
+    // Save locally
+    localStorage.setItem(
+      "requiredSkills",
+      requiredValue
+    );
 
+    localStorage.setItem(
+      "offeredSkills",
+      JSON.stringify(offeredValues)
+    );
 
-    alert("Skills saved successfully!");
+    // Get logged in email
+    const email =
+      localStorage.getItem("gmail");
+
+    // Send to backend
+    const res = await fetch(
+      "http://localhost:8000/auth/skills",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+          email,
+          requiredSkills: requiredValue,
+          offeredSkills: offeredValues
+        })
+      }
+    );
+
+    const data = await res.json();
+
+    if(data.success){
+        alert("Skills saved successfully!");
+    } else {
+        alert("Failed to save");
+    }
 }
+
+
 </script>
 </body>
 </html>

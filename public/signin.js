@@ -95,6 +95,7 @@ const firebaseConfig = {
     showToast(data.message,true);
 
     if(data.success == true){
+     
       setTimeout(()=>{
         window.location.href="homepage.html"
       },2000);

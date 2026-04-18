@@ -21,6 +21,35 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+router.post("/skills", async(req , res) =>{
+
+  try{
+    const{ email,requiredSkills,offeredSkills} = req.body;
+    let user = await user_info.findOne({email});
+    if(user){
+      user["requiredSkills"]= requiredSkills;
+      user["offeredSkills"] = offeredSkills;
+      await user.save();
+      res.status(200).json({
+        success:true,
+        message:"skills saved"
+      });
+    }
+    else{
+      res.status(500).json({
+        success:false,
+        message:"email not found"
+      });
+    }
+     }catch(error){
+    res.status(500).json({
+      success:false,
+      message:"Server Error"
+    });
+
+  }
+});
+
 
 
 router.post("/signin", async (req, res) => {
@@ -146,6 +175,8 @@ router.post("/reset_password", async(req,res) =>{
   }
 
 });
+
+
 
 
 export const auth_router = router;
