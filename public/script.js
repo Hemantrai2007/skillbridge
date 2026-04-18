@@ -172,3 +172,28 @@ function signInWithGoogle() {
       showError(errMap[id], false);
     });
   })}
+  });
+
+const searchInput = document.getElementById('pc-search-input'); 
+
+searchInput.addEventListener('keyup', () => {
+    const query = searchInput.value.toLowerCase();
+    const cards = document.querySelectorAll('.profile-card');
+
+    cards.forEach(card => {
+        // We use textContent to see if the skill exists in the card
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? 'flex' : 'none';
+    });
+});
+// Select all sidebar items
+const navItems = document.querySelectorAll('.nav-item');
+
+navItems.forEach(item => {
+    item.addEventListener('click', function() {
+        // Remove 'active' class from all others
+        navItems.forEach(i => i.classList.remove('active'));
+        // Add to the one we just clicked
+        this.classList.add('active');
+    });
+});
