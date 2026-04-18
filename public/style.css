@@ -12,11 +12,38 @@ body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background
 .side-nav {
     position: fixed; left: 0; top: 0; width: 80px; height: 100vh;
     background: var(--dark); display: flex; flex-direction: column; align-items: center; padding: 25px 0; z-index: 1000;
+    justify-content:space-between; overflow: visible;
 }
 .nav-profile-circle { width: 45px; height: 45px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer; }
 .nav-divider { width: 100%; border: 0; border-top: 1px solid #1a47c4; margin: 20px 0; }
 .nav-item { color: #acc9f5; font-size: 22px; margin: 15px 0; cursor: pointer; transition: 0.3s; }
 .nav-item.active { color: var(--primary); }
+
+.sidebar {
+    position: fixed;
+    height: 100vh;
+}
+
+.sidebar-bottom {
+    position: absolute;
+    margin-top: auto; 
+    padding-bottom: 30px;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar-bottom a {
+    color: white;
+    font-size: 22px;
+    transition: 0.3s;
+    display: inline-block;
+    padding: 10px;
+}
+
+.sidebar-bottom a:hover {
+    color: #ef4444;
+}
 
 /* HEADER */
 .main-wrapper { margin-left: 80px; flex: 1; display: flex; flex-direction: column; }

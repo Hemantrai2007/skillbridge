@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+<nav class="side-nav">
+    <div class="side-nav-top">
+        <a href="profile.html" class="nav-profile-circle">NV</a>
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-layer-group"></i>
+            <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="chat.html" class="nav-item">
+            <i class="fa-solid fa-message"></i>
+            <span class="nav-label">Chat</span>
+        </a>
+    </div>
+    <div class="sidebar-bottom">
+        <a href="settings.html">
+            <i class="fa-solid fa-gear"></i>
+            <span class="nav-label">Settings</span>
+        </a>
+    </div>
+</nav>
+
+<div class="main">
+    <h1>Settings</h1>
+
+    <div class="section">
+        <h2>Security</h2>
+        <div class="setting-item">
+            <span>Change Password</span>
+            <button class="btn" onclick="changePassword()">Change</button>
+        </div>
+        <div class="setting-item">
+            <span>Logout</span>
+            <button class="btn" onclick="logout()">Logout</button>
+        </div>
+        <div class="setting-item">
+            <span>Delete Account</span>
+            <button class="btn-danger" onclick="deleteAccount()">Delete</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Notifications</h2>
+        <div class="setting-item">
+            <span>Email Notifications</span>
+            <div class="toggle" onclick="toggleSwitch(this, 'emailNotif')"></div>
+        </div>
+        <div class="setting-item">
+            <span>Message Alerts</span>
+            <div class="toggle" onclick="toggleSwitch(this, 'msgNotif')"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Appearance</h2>
+        <div class="setting-item">
+            <span>Dark Mode</span>
+            <div class="toggle" onclick="toggleDarkMode(this)"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Privacy</h2>
+        <div class="setting-item">
+            <span>Profile Visibility</span>
+            <div class="toggle" onclick="toggleSwitch(this, 'visibility')"></div>
+        </div>
+        <div class="setting-item">
+            <span>Show Email</span>
+            <div class="toggle" onclick="toggleSwitch(this, 'showEmail')"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function toggleSwitch(el, key) {
+    el.classList.toggle("active");
+    localStorage.setItem(key, el.classList.contains("active"));
+}
+function toggleDarkMode(el) {
+    el.classList.toggle("active");
+    document.body.classList.toggle("light-mode");
+    localStorage.setItem("darkMode", el.classList.contains("active"));
+}
+
+window.onload = () => {
+    ["emailNotif", "msgNotif", "visibility", "showEmail"].forEach(key => {
+        if (localStorage.getItem(key) === "true") {
+            document.querySelectorAll(".toggle").forEach(t => {
+                if (t.getAttribute("onclick")?.includes(key)) {
+                    t.classList.add("active");
+                }
+            });
+        }
+    });
+
+    if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("light-mode");
+    }
+};
+
+function logout() {
+    alert("Connect Firebase logout here");
+}
+
+function changePassword() {
+    alert("Connect Firebase password change here");
+}
+
+function deleteAccount() {
+    if (confirm("Are you sure?")) {
+        alert("Connect Firebase delete here");
+    }
+}
+</script>
+</html>
