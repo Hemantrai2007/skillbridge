@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Email
         profileBio.innerHTML =
-            ` ${user.degree} || ${user.place} || <i class="fa-solid fa-envelope"></i> ${user.email}`;
+            ` ${user.degree} || ${user.place} || <i class="fa-solid fa-envelope"></i> ${user.email} || +91${user.contact}`;
 
         // Initials
         const initials = getInitials(user.user_name);
@@ -193,6 +193,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const offeredSkills = [
         document.getElementById("edit-offered").value
     ];
+
+    const contact = document.getElementById("edit-no.").value;
     
 
     const dob =
@@ -229,7 +231,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     offeredSkills,
                     about_user,
                     place,
-                    degree
+                    degree,
+                    contact
                 })
             }
         );

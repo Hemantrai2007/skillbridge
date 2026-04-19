@@ -212,7 +212,7 @@ router.post("/profile",async(req,res) => {
 router.post("/edit_profile", async(req,res) =>{
 
   try{
-    const {user_name,email,age,requiredSkills,offeredSkills,about_user,place,degree}=req.body;
+    const {user_name,email,age,requiredSkills,offeredSkills,about_user,place,degree,contact}=req.body;
     const user = await user_info.findOne({email});
    
     if(user){
@@ -221,6 +221,7 @@ router.post("/edit_profile", async(req,res) =>{
       user["about_user"]=about_user;
       user["degree"]=degree;
       user["place"]=place;
+      user["contact"]=contact;
       (requiredSkills).forEach(skill => {
       if (!user["requiredSkills"].includes(skill)) {
         user["requiredSkills"].push(skill);
