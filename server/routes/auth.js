@@ -259,6 +259,35 @@ router.post("/edit_profile", async(req,res) =>{
 
 
 
+router.delete("/delete_account", async (req,res)=>{
+    try{
+      const {email}=req.body;
+
+      const deleteUser = await user_info.findOneAndDelete({email});
+      console.log(deleteUser);
+      if(deleteUser){
+        return res.status(200).json({
+          success:true,
+          message:"Account deleted successfully"
+        });
+
+      }
+      else{
+        res.status(500).json({
+          success:false,
+          message:"User not found"
+        });
+      }
+    }
+    catch(error){
+      res.status(500).json({
+        success:false,
+        message:"Server Error"
+      });
+    }
+});
+
+
 export const auth_router = router;
 
 
