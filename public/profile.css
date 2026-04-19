@@ -72,7 +72,7 @@ h1 {font-size: 3rem; font-weight: 700; color: #e53935; letter-spacing: -0.5px; m
 /* ===== PROFILE GRID ===== */
 .profile-grid {display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;}
 
-.profile-info-card {background: radial-gradient(#fff0f0, #fff9f9, rgb(255, 233, 214), #b08968); padding: 30px; border-radius: 18px; border: 3px solid rgba(234, 42, 74, 0.12); box-shadow: 0 4px 16px rgba(232, 41, 74, 0.06); margin: 20px; transition: border-color 0.3s;}
+.profile-info-card {background: radial-gradient(#fff0f0, #fff9f9, rgb(255, 233, 214)); padding: 30px; border-radius: 18px; border: 3px solid rgba(234, 42, 74, 0.12); box-shadow: 0 4px 16px rgba(232, 41, 74, 0.06); margin: 20px; transition: border-color 0.3s;}
 
 .profile-info-card:hover {border-color: rgba(232, 41, 74, 0.28);}
 
@@ -96,21 +96,21 @@ h1 {font-size: 3rem; font-weight: 700; color: #e53935; letter-spacing: -0.5px; m
 .profile-tag.learn:hover {background: rgb(250, 217, 189);}
 
 /* ===== BUTTONS ===== */
-.btn-upgrade {background: radial-gradient(#fff0f0, #fff9f9, rgb(255, 233, 214), #b08968); color: #5a0018; border: 3px solid rgba(232, 41, 74, 0.3); padding: 12px 28px; border-radius: 10px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: inherit;}
+.btn-upgrade {background: radial-gradient(#fff0f0, #fff9f9, rgb(255, 233, 214)); color: #5a0018; border: 3px solid rgba(232, 41, 74, 0.3); padding: 12px 28px; border-radius: 10px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: inherit;}
 
-.btn-upgrade:hover {background: radial-gradient(#fff0f0, #ffe5e5, rgb(248, 218, 191), #b08968); border-color: rgba(232, 41, 74, 0.55); color: #5a0018; transform: translateY(-1px);}
+.btn-upgrade:hover {background: radial-gradient(#fff0f0, #ffe5e5, rgb(248, 218, 191)); border-color: rgba(232, 41, 74, 0.55); color: #5a0018; transform: translateY(-1px);}
 
 .btn-upgrade:active {transform: translateY(0);}
 
-.btn-cancel {background: radial-gradient(#fff0f0, #fff9f9, rgb(255, 233, 214), #b08968); color: #5a0018; border: 3px solid rgba(232, 41, 74, 0.3); padding: 12px 28px; border-radius: 10px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: inherit;}
+.btn-cancel {background: radial-gradient(#fff0f0, #fff9f9, rgb(255, 233, 214)); color: #5a0018; border: 3px solid rgba(232, 41, 74, 0.3); padding: 12px 28px; border-radius: 10px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; font-family: inherit;}
 
-.btn-cancel:hover {background: radial-gradient(#fff0f0, #ffe5e5, rgb(248, 218, 191), #b08968); border-color: rgba(232, 41, 74, 0.55); color: #5a0018; transform: translateY(-1px);}
+.btn-cancel:hover {background: radial-gradient(#fff0f0, #ffe5e5, rgb(248, 218, 191)); border-color: rgba(232, 41, 74, 0.55); color: #5a0018; transform: translateY(-1px);}
 
 .btn-cancel:active {transform: translateY(0);}
 
-#edit-profile-btn {margin-left: 30rem; background: radial-gradient(#fff0f0, #fff9f9, rgb(255, 233, 214), #b08968); color:#5a0018;}
+#edit-profile-btn {margin-left: 30rem; background: radial-gradient(#fff0f0, #fff9f9, rgb(255, 233, 214)); color:#5a0018;}
 
-#edit-profile-btn:hover {background: radial-gradient(#fff0f0, #ffe5e5, rgb(248, 218, 191), #b08968); border-color: rgba(232, 41, 74, 0.35); color: #5a0018; transform: translateY(-1px);}
+#edit-profile-btn:hover {background: radial-gradient(#fff0f0, #ffe5e5, rgb(248, 218, 191)); border-color: rgba(232, 41, 74, 0.35); color: #5a0018; transform: translateY(-1px);}
 
 /* ===== EDIT FORM ===== */
 .edit-form-card {background: #fff; padding: 30px; border-radius: 20px; border: 1px solid rgba(232, 41, 74, 0.14); box-shadow: 0 4px 16px rgba(232, 41, 74, 0.06);}
@@ -160,7 +160,7 @@ body.dark-mode .profile-text-details h1 {color: #ff8fa0;}
 
 body.dark-mode .profile-text-details p {color: rgba(255, 220, 228, 0.6);}
 
-body.dark-mode .profile-info-card {background: radial-gradient(#1e0008, #2d0010, #270715, #1a0008); border-color: rgba(232, 41, 74, 0.14); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);}
+body.dark-mode .profile-info-card {background: radial-gradient(#1e0008, #2d0010, #1a0008); border-color: rgba(232, 41, 74, 0.14); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08);}
 
 body.dark-mode .profile-info-card h3 {color: #ff8fa0;}
 
@@ -174,15 +174,15 @@ body.dark-mode .profile-tag.learn {background: rgba(255, 255, 255, 0.05); color:
 
 body.dark-mode .profile-tag.learn:hover {background: rgba(232, 41, 74, 0.12); border-color: rgba(232, 41, 74, 0.4);}
 
-body.dark-mode #edit-profile-btn {background: radial-gradient(#1e0008, #2d0010, #270715, #1a0008); color: rgba(255, 193, 207, 0.8); border-color: rgba(236, 24, 59, 0.2);}
+body.dark-mode #edit-profile-btn {background: radial-gradient(#1e0008, #2d0010, #1a0008); color: rgba(255, 193, 207, 0.8); border-color: rgba(236, 24, 59, 0.2);}
 
 body.dark-mode #edit-profile-btn:hover {background: radial-gradient(#2d0010, #1a0008, #0a0004); border-color: rgba(238, 31, 65, 0.4); color: rgba(255, 193, 207, 0.8); transform: translateY(-1px);}
 
-body.dark-mode .btn-upgrade {background: radial-gradient(#1e0008, #2d0010, #270715, #1a0008); color: rgba(255, 193, 207, 0.8); border-color: rgba(232, 41, 74, 0.2);}
+body.dark-mode .btn-upgrade {background: radial-gradient(#1e0008, #2d0010, #1a0008); color: rgba(255, 193, 207, 0.8); border-color: rgba(232, 41, 74, 0.2);}
 
 body.dark-mode .btn-upgrade:hover {background: radial-gradient(#2d0010, #1a0008, #0a0004); border-color: rgba(232, 41, 74, 0.4); color: rgba(255, 193, 207, 0.8);}
 
-body.dark-mode .btn-cancel {background: radial-gradient(#1e0008, #2d0010, #270715, #1a0008); color: rgba(255, 193, 207, 0.8); border-color: rgba(232, 41, 74, 0.2);}
+body.dark-mode .btn-cancel {background: radial-gradient(#1e0008, #2d0010, #1a0008); color: rgba(255, 193, 207, 0.8); border-color: rgba(232, 41, 74, 0.2);}
 
 body.dark-mode .btn-cancel:hover {background: radial-gradient(#2d0010, #1a0008, #0a0004); border-color: rgba(232, 41, 74, 0.4); color: rgba(255, 193, 207, 0.8);}
 
