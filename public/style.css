@@ -75,20 +75,3 @@ body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background
 .profile-tag { background: #f8f9fa; border: 1px solid #ddd; padding: 6px 15px; border-radius: 20px; font-size: 13px; display: inline-block; margin: 5px; }
 .profile-tag.learn { background: #fff5f5; color: var(--primary); border-color: #feb2b2; }
 
-/* CHAT SECTION */
-.chat-container { display: flex; background: white; height: 70vh; border-radius: 16px; border: 1px solid var(--border); overflow: hidden; }
-.chat-sidebar { width: 300px; border-right: 1px solid var(--border); overflow-y: auto; }
-.chat-list-item { display: flex; align-items: center; padding: 15px; gap: 12px; cursor: pointer; border-bottom: 1px solid #f9f9f9; }
-.chat-list-item.active { background: #fff5f5; border-left: 4px solid var(--primary); }
-.chat-window { flex: 1; display: flex; flex-direction: column; }
-.chat-header { padding: 15px 25px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 15px; }
-.chat-header-actions { margin-left: auto; color: #5f6368; font-size: 18px; display: flex; gap: 20px; }
-.chat-messages { flex: 1; padding: 20px; overflow-y: auto; background: #fafafa; display: flex; flex-direction: column; gap: 12px; }
-.message { max-width: 65%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-.message.received { background: white; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid #eee; }
-.message.sent { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
-.chat-input-area { padding: 15px 25px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 15px; }
-.attachment-triggers { display: flex; gap: 15px; color: #5f6368; font-size: 18px; }
-.icon-btn { cursor: pointer; background: none; border: none; color: inherit; padding: 0; }
-.chat-input-area input { flex: 1; border: none; background: #f1f3f4; border-radius: 25px; padding: 12px 20px; outline: none; }
-.btn-send { background: var(--primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
