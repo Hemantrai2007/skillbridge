@@ -29,7 +29,7 @@ const users = [
     }
 ];
 
-// The "Jeevansathi" Matching Algorithm
+
 app.get('/api/matches/:id', (req, res) => {
     const currentUser = users.find(u => u.id === parseInt(req.params.id));
     if (!currentUser) return res.status(404).json({ error: "User not found" });

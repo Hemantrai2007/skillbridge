@@ -110,7 +110,10 @@ window.onload = () => {
 };
 
 function logout() {
-    alert("Connect Firebase logout here");
+    console.log("In log out function");
+    setTimeout(()=>{
+        window.location.href="signin.html";
+    },2000);
 }
 
 function changePassword() {
