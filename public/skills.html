@@ -1,238 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkillBridge - Skills</title>
-<link href="skillss.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Skills</title>
+    <link href="skillss.css" rel="stylesheet">
 </head>
+
 <body>
 
-<!-- LEFT PANEL -->
-<div class="left">
-  <h2 id="welcomeText"></h2>
-  <div class="brand">
-    <h1>SkillBridge</h1>
-    <p>Build your skill exchange</p>
-  </div>
-
-  <!-- FORM -->
-  <form>
-
-    <!-- REQUIRED -->
-    <div class="form-group">
-      <label>Skills You Need</label>
-      <select id="requiredSkill" class="dropdown" onchange="checkOther('required')" required>
-        <option value="">Select Required Skill</option>
-        <option>C Programming</option>
-        <option>C++ Programming</option>
-        <option>Java</option>
-        <option>Python</option>
-        <option>Data Structures & Algorithms</option>
-        <option>Machine Learning</option>
-        <option>Cybersecurity</option>
-        <option>Frontend Development</option>
-        <option>Backend Development</option>
-        <option>Full-Stack Development</option>
-        <option>Cloud Computing</option>
-        <option>Database Management Systems</option>
-        <option>Operating Systems</option>
-        <option>Software Engineering</option>
-        <option>AI/ML</option>
-        <option>Competitive Programming</option>
-        <option>API Development & Integration</option>
-        <option>Blockchain</option>
-        <option>UI/UX Design</option>
-        <option value="other">Other</option>
-      </select>
-
-      <input type="text" id="requiredOther" placeholder="Enter required skill" style="display:none; margin-top:10px;">
-    </div>
-
-    <!-- OFFERED -->
-    <label>Skills You Offer</label>
-    <div class="multi-select">
-
-        <div class="select-box" id="selectBoxText" onclick="toggleDropdown()">
-            Select your skills
+    <!-- LEFT PANEL -->
+    <div class="left">
+        <h2 id="welcomeText"></h2>
+        <div class="brand">
+            <h1>SkillBridge</h1>
+            <p>Build your skill exchange</p>
         </div>
 
-        <div class="checkbox-list" id="checkboxList">
-            <label><input type="checkbox" value="C Programming"><span>C Programming</span></label>
-            <label><input type="checkbox" value="C++ Programming"><span>C++ Programming</span></label>
-            <label><input type="checkbox" value="Java"><span>Java</span></label>
-            <label><input type="checkbox" value="Python"><span>Python</span></label>
-            <label><input type="checkbox" value="Data Structures & Algorithms"><span>Data Structures & Algorithms</span></label>
-            <label><input type="checkbox" value="Machine Learning"><span>Machine Learning</span></label>
-            <label><input type="checkbox" value="Cybersecurity"><span>Cybersecurity</span></label>
-            <label><input type="checkbox" value="Frontend Development"><span>Frontend Development</span></label>
-            <label><input type="checkbox" value="Backend Development"><span>Backend Development</span></label>
-            <label><input type="checkbox" value="Full Stack Development"><span>Full Stack Development</span> </label>
-            <label><input type="checkbox" value="Cloud Computing"><span>Cloud Computing</span></label>
-            <label><input type="checkbox" value="Database Management Systems"><span>Database Management Systems</span></label>
-            <label><input type="checkbox" value="Operating Systems"><span>Operating Systems</span></label>
-            <label><input type="checkbox" value="Software Engineering"><span>Software Engineering</span></label>
-            <label><input type="checkbox" value="AI/ML"><span>AI/ML</span></label>
-            <label><input type="checkbox" value="Competitive Programming"><span>Competitive Programming</span></label>
-            <label><input type="checkbox" value="API Development & Integration"><span>API Development & Integration</span></label>
-            <label><input type="checkbox" value="Blockchain"><span>Blockchain</span></label>
-            <label><input type="checkbox" value="UI/UX"><span>UI/UX Design</span></label>
-            <label><input type="checkbox" id="otherCheck" value="Other" onclick="toggleOtherInput()"><span>Other</span></label>
-        </div>
-        <!-- Hidden Input -->
-        <input type="text" id="otherInput" placeholder="Enter your skill (e.g., DevOps, AR/VR)" style="display:none; margin-top:10px;">
+        <!-- FORM -->
+        <form>
 
+            <!-- REQUIRED -->
+            <div class="form-group">
+                <label>Skills You Need</label>
+                <select id="requiredSkill" class="dropdown" onchange="checkOther('required')" required>
+                    <option value="">Select Required Skill</option>
+                    <option>C Programming</option>
+                    <option>C++ Programming</option>
+                    <option>Java</option>
+                    <option>Python</option>
+                    <option>Data Structures & Algorithms</option>
+                    <option>Machine Learning</option>
+                    <option>Cybersecurity</option>
+                    <option>Frontend Development</option>
+                    <option>Backend Development</option>
+                    <option>Full-Stack Development</option>
+                    <option>Cloud Computing</option>
+                    <option>Database Management Systems</option>
+                    <option>Operating Systems</option>
+                    <option>Software Engineering</option>
+                    <option>AI/ML</option>
+                    <option>Competitive Programming</option>
+                    <option>API Development & Integration</option>
+                    <option>Blockchain</option>
+                    <option>UI/UX Design</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <input type="text" id="requiredOther" placeholder="Enter required skill"
+                    style="display:none; margin-top:10px;">
+            </div>
+
+            <!-- OFFERED -->
+            <label>Skills You Offer</label>
+            <div class="multi-select">
+
+                <div class="select-box" id="selectBoxText" onclick="toggleDropdown()">
+                    Select your skills
+                </div>
+
+                <div class="checkbox-list" id="checkboxList">
+                    <label><input type="checkbox" value="C Programming"><span>C Programming</span></label>
+                    <label><input type="checkbox" value="C++ Programming"><span>C++ Programming</span></label>
+                    <label><input type="checkbox" value="Java"><span>Java</span></label>
+                    <label><input type="checkbox" value="Python"><span>Python</span></label>
+                    <label><input type="checkbox" value="Data Structures & Algorithms"><span>Data Structures &
+                            Algorithms</span></label>
+                    <label><input type="checkbox" value="Machine Learning"><span>Machine Learning</span></label>
+                    <label><input type="checkbox" value="Cybersecurity"><span>Cybersecurity</span></label>
+                    <label><input type="checkbox" value="Frontend Development"><span>Frontend Development</span></label>
+                    <label><input type="checkbox" value="Backend Development"><span>Backend Development</span></label>
+                    <label><input type="checkbox" value="Full Stack Development"><span>Full Stack Development</span>
+                    </label>
+                    <label><input type="checkbox" value="Cloud Computing"><span>Cloud Computing</span></label>
+                    <label><input type="checkbox" value="Database Management Systems"><span>Database Management
+                            Systems</span></label>
+                    <label><input type="checkbox" value="Operating Systems"><span>Operating Systems</span></label>
+                    <label><input type="checkbox" value="Software Engineering"><span>Software Engineering</span></label>
+                    <label><input type="checkbox" value="AI/ML"><span>AI/ML</span></label>
+                    <label><input type="checkbox" value="Competitive Programming"><span>Competitive
+                            Programming</span></label>
+                    <label><input type="checkbox" value="API Development & Integration"><span>API Development &
+                            Integration</span></label>
+                    <label><input type="checkbox" value="Blockchain"><span>Blockchain</span></label>
+                    <label><input type="checkbox" value="UI/UX"><span>UI/UX Design</span></label>
+                    <label><input type="checkbox" id="otherCheck" value="Other"
+                            onclick="toggleOtherInput()"><span>Other</span></label>
+                </div>
+                <!-- Hidden Input -->
+                <input type="text" id="otherInput" placeholder="Enter your skill (e.g., DevOps, AR/VR)"
+                    style="display:none; margin-top:10px;">
+
+            </div>
+            <button type="button" class="btn-submit" onclick="saveSkills()">Find Matches</button>
+        </form>
     </div>
-    <button type="button" class="btn-submit" onclick="saveSkills()">Find Matches</button>
-  </form>
-</div>
 
-<!-- RIGHT PANEL (IDENTICAL) -->
-<div class="right">
-  <img src="https://static.vecteezy.com/system/resources/previews/052/940/989/non_2x/isometric-illustration-shows-students-engaging-with-online-education-platform-featuring-laptop-books-graduation-cap-scientific-elements-and-english-language-learning-resources-vector.jpg"
-       alt="Skill Illustration">
+    <!-- RIGHT PANEL (IDENTICAL) -->
+    <div class="right">
+        <img src="https://static.vecteezy.com/system/resources/previews/052/940/989/non_2x/isometric-illustration-shows-students-engaging-with-online-education-platform-featuring-laptop-books-graduation-cap-scientific-elements-and-english-language-learning-resources-vector.jpg"
+            alt="Skill Illustration">
 
-  <h1>Exchange skills, not money</h1>
-  <p>Find people who need your skills and trade what you know.</p>
-</div>
+        <h1>Bridge the gap between<br>skills and success</h1> <br>
+        <p>Join thousands of learners who are already mastering new skills and advancing their careers with SkillBridge.
+        </p>
+    </div>
 
-<script>
-window.onload = function () {
-    const name = localStorage.getItem("userName");
+    <script>
+        window.onload = function () {
+            const name = localStorage.getItem("userName");
 
-    if (name) {
-        document.getElementById("welcomeText").innerText = "Welcome, " + name;
-    }
-};
+            if (name) {
+                document.getElementById("welcomeText").innerText = "Welcome, " + name;
+            }
+        };
 
-function checkOther(type) {
-    if (type === 'required') {
-        let val = document.getElementById("requiredSkill").value;
+        function checkOther(type) {
+            if (type === 'required') {
+                let val = document.getElementById("requiredSkill").value;
 
-        document.getElementById("requiredOther").style.display = val === "other" ? "block" : "none";
+                document.getElementById("requiredOther").style.display = val === "other" ? "block" : "none";
 
+                const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
+
+                checkboxes.forEach(box => {
+                    let skillText = box.nextElementSibling?.innerText;
+
+                    if (skillText === val) {
+                        box.checked = false;
+                        box.disabled = true;
+                        box.parentElement.style.opacity = "0.5";
+                    } else {
+                        box.disabled = false;
+                        box.parentElement.style.opacity = "1";
+                    }
+                });
+                updateSelectedSkills();
+            }
+        }
+
+        function toggleDropdown() {
+            document.getElementById("checkboxList").classList.toggle("show");
+
+        }
+
+        const otherCheck = document.getElementById("otherCheck");
+        const otherInput = document.getElementById("otherInput");
+        const dropdown = document.getElementById("checkboxList");
+        otherCheck.addEventListener("change", function () {
+            if (this.checked) {
+                // Show input
+                otherInput.style.display = "block";
+
+                // Close dropdown
+                dropdown.classList.remove("show");
+            } else {
+                otherInput.style.display = "none";
+            }
+        });
+
+        const selectBoxText = document.getElementById("selectBoxText");
         const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
 
         checkboxes.forEach(box => {
-            let skillText = box.nextElementSibling?.innerText;
-
-            if (skillText === val) {
-                box.checked = false;         
-                box.disabled = true;         
-                box.parentElement.style.opacity = "0.5"; 
-            } else {
-                box.disabled = false;
-                box.parentElement.style.opacity = "1";
-            }
+            box.addEventListener("change", updateSelectedSkills);
         });
-        updateSelectedSkills();
-    }
-}
 
-function toggleDropdown() {
-    document.getElementById("checkboxList").classList.toggle("show");
-    
-}
+        function updateSelectedSkills() {
+            let selected = [];
 
-const otherCheck = document.getElementById("otherCheck");
-const otherInput = document.getElementById("otherInput");
-const dropdown = document.getElementById("checkboxList");
-otherCheck.addEventListener("change", function () {
-    if (this.checked) {
-        // Show input
-        otherInput.style.display = "block";
+            checkboxes.forEach(box => {
+                if (box.checked && box.nextElementSibling) {
+                    selected.push(box.nextElementSibling.innerText);
+                }
+            });
 
-        // Close dropdown
-        dropdown.classList.remove("show");
-    } else {
-        otherInput.style.display = "none";
-    }
-});
+            if (selected.length === 0) {
+                selectBoxText.innerText = "Select your skills";
+            }
+            else if (selected.length <= 3) {
+                selectBoxText.innerText = selected.join(", ");
+            }
+            else {
+                let firstThree = selected.slice(0, 3).join(", ");
+                let remaining = selected.length - 3;
 
-const selectBoxText = document.getElementById("selectBoxText");
-const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
-
-checkboxes.forEach(box => {
-    box.addEventListener("change", updateSelectedSkills);
-});
-
-function updateSelectedSkills() {
-    let selected = [];
-
-    checkboxes.forEach(box => {
-        if (box.checked && box.nextElementSibling) {
-            selected.push(box.nextElementSibling.innerText);
+                selectBoxText.innerText = `${firstThree} +${remaining} more`;
+            }
         }
-    });
 
-    if (selected.length === 0) {
-        selectBoxText.innerText = "Select your skills";
-    } 
-    else if (selected.length <= 3) {
-        selectBoxText.innerText = selected.join(", ");
-    } 
-    else {
-        let firstThree = selected.slice(0, 3).join(", ");
-        let remaining = selected.length - 3;
+        async function saveSkills() {
 
-        selectBoxText.innerText = `${firstThree} +${remaining} more`;
-    }
-}
+            const requiredValue = document.getElementById("requiredSkill").value;
 
-async function saveSkills() {
+            const offered = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
+            let offeredValues = [];
 
-   const requiredValue = document.getElementById("requiredSkill").value;
+            offered.forEach(skill => {
+                offeredValues.push(
+                    skill.value
+                );
+            });
 
-    const offered = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
-    let offeredValues = [];
+            // Save locally
+            localStorage.setItem(
+                "requiredSkills",
+                requiredValue
+            );
 
-    offered.forEach(skill => {
-        offeredValues.push(
-          skill.value
-        );
-    });
+            localStorage.setItem(
+                "offeredSkills",
+                JSON.stringify(offeredValues)
+            );
 
-    // Save locally
-    localStorage.setItem(
-      "requiredSkills",
-      requiredValue
-    );
+            // Get logged in email
+            const email =
+                localStorage.getItem("gmail");
 
-    localStorage.setItem(
-      "offeredSkills",
-      JSON.stringify(offeredValues)
-    );
+            // Send to backend
+            const res = await fetch(
+                "http://localhost:8000/auth/skills",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email,
+                        requiredSkills: requiredValue,
+                        offeredSkills: offeredValues
+                    })
+                }
+            );
 
-    // Get logged in email
-    const email =
-      localStorage.getItem("gmail");
+            const data = await res.json();
 
-    // Send to backend
-    const res = await fetch(
-      "http://localhost:8000/auth/skills",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":"application/json"
-        },
-        body: JSON.stringify({
-          email,
-          requiredSkills: requiredValue,
-          offeredSkills: offeredValues
-        })
-      }
-    );
-
-    const data = await res.json();
-
-    if(data.success){
-        alert("Skills saved successfully!");
-    } else {
-        alert("Failed to save");
-    }
-}
+            if (data.success) {
+                alert("Skills saved successfully!");
+            } else {
+                alert("Failed to save");
+            }
+        }
 
 
-</script>
+    </script>
 </body>
+
 </html>
