@@ -240,6 +240,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await res.json();
 
         if(data.success){
+            const value=user_name;
+            localStorage.setItem("username",value);
             loadProfile();
             setTimeout(()=>{
                 location.reload();

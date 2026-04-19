@@ -264,8 +264,8 @@ router.delete("/delete_account", async (req,res)=>{
       const {email}=req.body;
 
       const deleteUser = await user_info.findOneAndDelete({email});
-
-      if(deletedUser){
+      console.log(deleteUser);
+      if(deleteUser){
         return res.status(200).json({
           success:true,
           message:"Account deleted successfully"
