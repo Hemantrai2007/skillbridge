@@ -21,6 +21,35 @@ router.post("/signup", async (req, res) => {
   }
 });
 
+router.post("/skills", async(req , res) =>{
+
+  try{
+    const{ email,requiredSkills,offeredSkills} = req.body;
+    let user = await user_info.findOne({email});
+    if(user){
+      user["requiredSkills"]= requiredSkills;
+      user["offeredSkills"] = offeredSkills;
+      await user.save();
+      res.status(200).json({
+        success:true,
+        message:"skills saved"
+      });
+    }
+    else{
+      res.status(500).json({
+        success:false,
+        message:"email not found"
+      });
+    }
+     }catch(error){
+    res.status(500).json({
+      success:false,
+      message:"Server Error"
+    });
+
+  }
+});
+
 
 
 router.post("/signin", async (req, res) => {
@@ -146,6 +175,88 @@ router.post("/reset_password", async(req,res) =>{
   }
 
 });
+
+//profile page backend
+router.post("/profile",async(req,res) => {
+    try{
+      const {email} = req.body;
+      if(!email){
+        return res.status(400).json({
+          success:false,
+          message:"Signup or Signin Issue"
+        });
+      }
+       const user = await user_info.findOne({ email });
+       if(user){
+        return res.status(200).json({
+          success:true,
+          user: user
+        });
+       } 
+       else{
+        return res.status(500).json({
+          success:false,
+          message:"user not found"
+        });
+       }
+      
+
+    }catch(error){
+      res.status(500).json({
+        success:false,
+        message:"Server error"
+      });
+    }
+});
+
+router.post("/edit_profile", async(req,res) =>{
+
+  try{
+    const {user_name,email,age,requiredSkills,offeredSkills,about_user,place,degree,contact}=req.body;
+    const user = await user_info.findOne({email});
+   
+    if(user){
+      user["user_name"]=user_name;
+      user["age"]=age;
+      user["about_user"]=about_user;
+      user["degree"]=degree;
+      user["place"]=place;
+      user["contact"]=contact;
+      (requiredSkills).forEach(skill => {
+      if (!user["requiredSkills"].includes(skill)) {
+        user["requiredSkills"].push(skill);
+      }
+    });
+  
+
+
+    // add offered skills
+    (offeredSkills).forEach(skill => {
+      if (!user["offeredSkills"].includes(skill)) {
+        user ["offeredSkills"].push(skill);
+      }
+    });
+    
+      await user.save();
+      res.status(200).json({
+        success:true,
+        message:"Data Updated successfully"
+      });
+    }
+    else{
+      res.status(500).json({
+        success:false,
+        message:"User not Exist"
+      });
+    }
+  }catch(error){
+     res.status(500).json({
+        success:false,
+        message:"Server hello error"
+      });
+  }
+});
+
 
 
 router.delete("/delete_account", async (req,res)=>{

@@ -15,7 +15,7 @@ body {font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 /* ── Typography & Brand ── */
 .brand { margin-bottom: 2rem; }
 .brand h1 { font-size: 3.5rem; font-weight: 700; color: #e53935; letter-spacing: -0.5px; }
-.brand p { font-size: 0.95rem; color: #666; margin-top: 4px; }
+.brand p { font-size: 1rem; color: #666; margin-top: 4px; }
 
 .right h2 { font-size: 1.6rem; font-weight: 700; color: #1a1a1a; margin-bottom: 0.75rem; line-height: 1.3; }
 .right p { font-size: 0.95rem; color: #555; max-width: 380px; line-height: 1.6; }

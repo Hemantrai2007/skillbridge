@@ -6,5 +6,4 @@ export const connect = async ()=>{
   }
   catch(error){
     console.log("Error");
-  }
-}
+  }}

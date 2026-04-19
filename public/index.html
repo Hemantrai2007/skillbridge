@@ -8,42 +8,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
-    <div class="logo">SkillBridge</div>
-    
-    <div class="nav-links">
-        <a href="#" class="active">My Matches</a>
-    </div>
-     <div class="nav-search-bar">
-        <input type="text" id="pc-search-input" placeholder="Search by skill (e.g. Python, React)...">
-        <button class="search-btn-inner" onclick="handleSearch()">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-    </div>
-     <div class="nav-links">
-        <a href="#" class="active">Inbox</a>
-    </div>
-    <div class="nav-user">
-        <i class="fa-regular fa-bell"></i>
-    </div>
-</nav>
 
-    <div class="container">
-        <aside class="sidebar-left">
-            <div class="card profile-mini">
-                <h3>Hemant Rai</h3>
-                <p>B.Tech CS Student</p>
-                <div class="badge">Verified</div>
+    <nav class="side-nav">
+        <div class="side-nav-top">
+            <a href="profile.html" class="nav-profile-circle" title="My Profile">HR</a>
+            <hr class="nav-divider">
+            <a href="index.html" class="nav-item active" id="nav-matches" title="Matches">
+                <i class="fa-solid fa-layer-group"></i>
+            </a>
+            <a href="chat.html" class="nav-item" id="nav-inbox" title="Inbox">
+                <i class="fa-solid fa-message"></i>
+            </a>
+        </div>
+        <div class="sidebar-bottom">
+            <a href="settings.html" title="Settings">
+                <i class="fa-solid fa-gear"></i>
+            </a>
+    </div>
+    </nav>
+
+    <div class="main-wrapper">
+        <header class="top-bar">
+            <div class="logo">SkillBridge</div>
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="pc-search-input" placeholder="Search skills (e.g. Python, Node.js)...">
             </div>
-            
-        </aside>
+            <div class="top-bar-actions">
+                <div class="notification-wrapper">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="pulse-dot"></span>
+                
+        </header>
 
-        <main id="match-feed">
-            <h2 class="section-title">New Matches for You</h2>
-            <div id="loader" class="loader">Calculating Compatibility...</div>
+        <div class="container">
+            <aside class="sidebar-left">
+                <div class="card profile-mini">
+                    <h3 style="margin:0;">Hemant Rai</h3>
+                    <p style="color:#666; font-size:14px;">B.Tech CS Student</p>
+                    <div class="badge">Verified</div>
+                </div>
+            </aside>
+
+            <main id="main-content-area">
+                <section id="match-feed-view">
+                    <h2 class="section-title">New Matches for You</h2>
+                    <div id="loader" class="loader">Calculating Compatibility...</div>
+                    <div id="matches-container"></div>
+                </section>
             </main>
-
-        
+        </div>
     </div>
 
     <script src="app.js"></script>

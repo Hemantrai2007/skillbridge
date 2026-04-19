@@ -98,7 +98,9 @@
 
     if(data.success){
       setTimeout(()=>{
-        window.location.href="requirement.html"},2000);
+        const value= email;
+        localStorage.setItem("gmail",value);
+        window.location.href="skills.html"},2000);
     }
     else{
       setTimeout(()=>{
@@ -120,4 +122,7 @@
       const errMap = { fullName: 'nameError', email: 'emailError', password: 'passwordError' };
       showError(errMap[id], false);
     });
-  })}
+  });
+
+const searchInput = document.getElementById('pc-search-input'); 
+

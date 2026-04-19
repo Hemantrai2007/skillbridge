@@ -299,9 +299,12 @@ async function handleSubmit() {
     const data = await response.json();
 
     if (data.success) {
+      const value=email;
+      console.log(value);
+      localStorage.setItem("gmail",value);
       showToast("Login Success", true);
       setTimeout(() => {
-        window.location.href = "dashboard.html";
+        window.location.href = "homepage.html";
       }, 1500);
     } else {
       showToast(data.message || "Invalid Credentials", false);
