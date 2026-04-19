@@ -138,9 +138,11 @@ body.dark-mode .side-nav {background: #1e0008; border-right-color: rgba(232, 41,
 
 body.dark-mode .nav-item {color: rgba(255, 180, 190, 0.5);}
 
+body.dark-mode .sidebar-bottom a {color: rgba(255, 180, 190, 0.5);}
+
 body.dark-mode .nav-item:hover, body.dark-mode .nav-item.active {color: #e8294a; background: rgba(232, 41, 74, 0.12);}
 
-body.dark-mode .sidebar-bottom a {background: rgba(232, 41, 74, 0.15); border-color: rgba(232, 41, 74, 0.25);}
+body.dark-mode .sidebar-bottom:hover a {color: #e8294a; background: rgba(232, 41, 74, 0.12);}
 
 body.dark-mode .main-wrapper {background: #34071b;}
 
@@ -164,7 +166,7 @@ body.dark-mode .profile-cover {background: #2d0010;}
 
 body.dark-mode .large-profile-circle {border-color: #1e0008;}
 
-body.dark-mode .profile-text-details h1 {color: #ffe8ee;}
+body.dark-mode .profile-text-details h1 {color: #ff8fa0;}
 
 body.dark-mode .profile-text-details p {color: rgba(255, 220, 228, 0.6);}
 
