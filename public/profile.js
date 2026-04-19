@@ -1,102 +1,262 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Profile Navigation
-    const navMatches = document.getElementById('nav-matches');
-    const navInbox = document.getElementById('nav-inbox');
+document.addEventListener("DOMContentLoaded", () => {
+
+    // =========================
+    // ELEMENTS
+    // =========================
+    const navMatches = document.getElementById("nav-matches");
+    const navInbox = document.getElementById("nav-inbox");
+
+    const editProfileBtn = document.getElementById("edit-profile-btn");
+    const profileView = document.getElementById("profile-view");
+    const editSection = document.getElementById("edit-profile-section");
+    const cancelEditBtn = document.getElementById("cancel-edit-btn");
+    const saveEditBtn = document.getElementById("save-profile-btn");
+
+    const profileName = document.getElementById("profile-name");
+    const profileBio = document.getElementById("profile-bio");
+    const profileAbout = document.getElementById("profile-about");
+
+    const profileInitials = document.getElementById("profile-initials");
+    const navProfileInitials = document.getElementById("nav-profile-initials");
+
+    const teachSkillsContainer = document.getElementById("teach-skills");
+    const learnSkillsContainer = document.getElementById("learn-skills");
+
     
-    // Profile Elements
-    const editProfileBtn = document.getElementById('edit-profile-btn');
-    const profileName = document.getElementById('profile-name');
-    const profileBio = document.getElementById('profile-bio');
-    const profileAbout = document.getElementById('profile-about');
-    const profileInitials = document.getElementById('profile-initials');
-    const navProfileInitials = document.getElementById('nav-profile-initials');
-    const profileBadges = document.getElementById('profile-badges');
-    const teachSkillsContainer = document.getElementById('teach-skills');
-    const learnSkillsContainer = document.getElementById('learn-skills');
 
-    // Profile Data
-    const userProfile = {
-        name: "Hemant Rai",
-        bio: "B.Tech Computer Science | DSEU Delhi",
-        teaches: ["React.js", "Node.js", "Arduino Robotics", "C++ Programming"],
-        wants: ["Python ML", "UI/UX Design"],
-        about: "I am a passionate CS student focused on bridging the gap between hardware (Robotics) and software (Full-stack Web Dev). Currently building SkillBridge Pro to help students trade knowledge.",
-        verified: true,
-        isPro: true
-    };
 
-    // Helper to get initials
-    const getInitials = (name) => {
-        return name.split(' ').map(n => n[0]).join('').toUpperCase();
-    };
+    // =========================
+    // HELPER FUNCTION
+    // =========================
+    function getInitials(name) {
+        return name
+            .split(" ")
+            .map(word => word[0])
+            .join("")
+            .toUpperCase();
+    }
 
-    // Function to render profile data
-    const renderProfile = (data) => {
-        const initials = getInitials(data.name);
-        if (profileName) profileName.textContent = data.name;
-        if (profileBio) profileBio.innerHTML = `<i class="fa-solid fa-university"></i> ${data.bio}`;
-        if (profileAbout) profileAbout.textContent = data.about;
-        if (profileInitials) profileInitials.textContent = initials;
-        if (navProfileInitials) navProfileInitials.textContent = initials;
 
-        // Render Badges
-        if (profileBadges) {
-            profileBadges.innerHTML = '';
-            if (data.verified) {
-                profileBadges.innerHTML += `<span class="badge-verified"><i class="fa-solid fa-check-double"></i> Verified Expert</span>`;
+    // =========================
+    // RENDER PROFILE DATA
+    // =========================
+    function renderProfile(user) {
+
+        // Name
+        profileName.textContent = capitalizeWords(user.user_name);
+
+        // Email
+        profileBio.innerHTML =
+            ` ${user.degree} || ${user.place} || <i class="fa-solid fa-envelope"></i> ${user.email}`;
+
+        // Initials
+        const initials = getInitials(user.user_name);
+
+        profileInitials.textContent = initials;
+        navProfileInitials.textContent = initials;
+
+        // Skills I Teach
+        teachSkillsContainer.innerHTML = "";
+
+        user.offeredSkills.forEach(skill => {
+            teachSkillsContainer.innerHTML +=
+                `<span class="profile-tag">${skill}</span>`;
+        });
+
+        learnSkillsContainer.innerHTML = "";
+        user.requiredSkills.forEach(skill =>{
+            learnSkillsContainer.innerHTML +=
+            `<span class="profile-tag">${skill}</span>`;
+        });
+
+        // What I Want To Learn
+      
+        // About
+        profileAbout.textContent = user.about_user;
+    }
+    //======================
+    //capitalized funtion
+    //======================
+    function capitalizeWords(text) {
+    return text
+        .toLowerCase()
+        .split(" ")
+        .map(word =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+        )
+        .join(" ");
+}
+
+
+    // =========================
+    // LOAD PROFILE FROM BACKEND
+    // =========================
+    async function loadProfile() {
+
+        const email = localStorage.getItem("gmail");
+
+        if (!email) {
+            alert("Please login first");
+            window.location.href = "signin.html";
+            return;
+        }
+
+        try {
+
+            const res = await fetch(
+                "http://localhost:8000/auth/profile",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ email })
+                }
+            );
+
+            const data = await res.json();
+
+            if (data.success) {
+                renderProfile(data.user);
+                console.log("Profile loaded successfully");
+            } else {
+                alert("User not found");
             }
-            if (data.isPro) {
-                profileBadges.innerHTML += `<span class="badge-pro">PRO Member</span>`;
-            }
+
+        } catch (error) {
+            console.log(error);
+            alert("Server connection failed");
         }
+    }
 
-        // Render Teaching Skills
-        if (teachSkillsContainer) {
-            teachSkillsContainer.innerHTML = '';
-            data.teaches.forEach(skill => {
-                const span = document.createElement('span');
-                span.className = 'profile-tag';
-                span.textContent = skill;
-                teachSkillsContainer.appendChild(span);
-            });
-        }
 
-        // Render Learning Skills
-        if (learnSkillsContainer) {
-            learnSkillsContainer.innerHTML = '';
-            data.wants.forEach(skill => {
-                const span = document.createElement('span');
-                span.className = 'profile-tag learn';
-                span.textContent = skill;
-                learnSkillsContainer.appendChild(span);
-            });
-        }
-    };
-
-    // Initial Render
-    renderProfile(userProfile);
-
-    // Navigation Logic
+    // =========================
+    // NAVIGATION
+    // =========================
     if (navMatches) {
         navMatches.onclick = (e) => {
             e.preventDefault();
-            window.location.href = 'index.html';
+            window.location.href = "index.html";
         };
     }
 
     if (navInbox) {
         navInbox.onclick = (e) => {
             e.preventDefault();
-            window.location.href = 'chat.html';
+            window.location.href = "chat.html";
         };
     }
 
-    // Edit Profile Button
+    // =========================
+    // EDIT MODE LOGIC
+    // =========================
     if (editProfileBtn) {
         editProfileBtn.onclick = () => {
-            alert("Edit Profile feature coming soon!");
+            if (profileView && editSection) {
+                profileView.style.display = "none";
+                editSection.style.display = "block";
+            }
         };
     }
 
-    console.log("Profile loaded and rendered:", userProfile);
+    if (cancelEditBtn) {
+        cancelEditBtn.onclick = () => {
+            if (profileView && editSection) {
+                profileView.style.display = "block";
+                editSection.style.display = "none";
+            }
+        };
+    }
+
+
+    saveEditBtn.addEventListener("click", async () => {
+
+    const email =
+        localStorage.getItem("gmail");
+
+    const user_name =
+        document.getElementById("edit-name").value;
+
+    const place =
+        document.getElementById("edit-place").value;
+
+     const degree =
+        document.getElementById("edit-degree").value;
+
+    const about_user =
+        document.getElementById("edit-about").value;
+
+    const requiredSkills = [
+        document.getElementById("edit-required").value
+    ];
+
+    const offeredSkills = [
+        document.getElementById("edit-offered").value
+    ];
+    
+
+    const dob =
+    document.getElementById("edit-age").value;
+    
+    // Calculate Age
+    const birthDate = new Date(dob);
+    const today = new Date();
+    
+    let age =
+    today.getFullYear() -birthDate.getFullYear();
+    
+    const monthDiff = today.getMonth() -birthDate.getMonth();
+    
+    if (monthDiff < 0 ||(monthDiff === 0 &&today.getDate() < birthDate.getDate())){
+       age--;
+    }
+   
+
+    try {
+
+        const res = await fetch(
+            "http://localhost:8000/auth/edit_profile",
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({
+                    user_name,
+                    email,
+                    age,
+                    requiredSkills,
+                    offeredSkills,
+                    about_user,
+                    place,
+                    degree
+                })
+            }
+        );
+       
+        const data = await res.json();
+
+        if(data.success){
+            loadProfile();
+            setTimeout(()=>{
+                location.reload();
+            },4000);
+        } else {
+            alert(data.message);
+        }
+
+    } catch(error){
+        console.log(error);
+        alert("Server Error");
+    }
+
+});
+
+    
+
+    // =========================
+    // INITIAL CALL
+    // =========================
+    loadProfile();
+
 });

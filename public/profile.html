@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillBridge Pro | My Profile</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <nav class="side-nav">
@@ -37,51 +40,137 @@
             </div>
         </header>
 
+
+        </aside>
+
         <main id="main-content-area">
-                <section id="profile-view">
-                    <h2 class="section-title">My Personal Profile</h2>
-                    <div class="profile-header-card">
-                        <div class="profile-cover"></div>
-                        <div class="profile-main-info">
-                            <div class="large-profile-circle" id="profile-initials">HR</div>
-                            <div class="profile-text-details">
-                                <h1 id="profile-name">Hemant Rai</h1>
-                                <p id="profile-bio"><i class="fa-solid fa-university"></i> B.Tech Computer Science | DSEU Delhi</p>
-                                <div class="profile-badges" id="profile-badges">
-                                    <span class="badge-verified"><i class="fa-solid fa-check-double"></i> Verified Expert</span>
-                                    <span class="badge-pro">PRO Member</span>
-                                </div>
-                            </div>
+            <section id="profile-view">
+                <h2 class="section-title">My Personal Profile</h2>
+                <div class="profile-header-card">
+                    <div class="profile-cover"></div>
+                    <div class="profile-main-info">
+                        <div class="large-profile-circle" id="profile-initials">HR</div>
+                        <div class="profile-text-details">
+                            <h1 id="profile-name">Hemant Rai</h1>
+                            <p id="profile-bio"><i class="fa-solid fa-university"></i> B.Tech Computer Science | DSEU
+                                Delhi</p>
+
                         </div>
                     </div>
-                    <div class="profile-grid">
-                        <div class="profile-info-card">
-                            <h3><i class="fa-solid fa-award"></i> Skills I Teach</h3>
-                            <div class="tag-list" id="teach-skills">
-                                <span class="profile-tag">React.js</span>
-                                <span class="profile-tag">Node.js</span>
-                                <span class="profile-tag">Arduino Robotics</span>
-                                <span class="profile-tag">C++ Programming</span>
-                            </div>
-                        </div>
-                        <div class="profile-info-card">
-                            <h3><i class="fa-solid fa-lightbulb"></i> What I want to Learn</h3>
-                            <div class="tag-list" id="learn-skills">
-                                <span class="profile-tag learn">Python ML</span>
-                                <span class="profile-tag learn">UI/UX Design</span>
-                            </div>
-                        </div>
-                        <div class="profile-info-card full-width">
-                            <h3><i class="fa-solid fa-user-astronaut"></i> About Me</h3>
-                            <p id="profile-about">I am a passionate CS student focused on bridging the gap between hardware (Robotics) and software (Full-stack Web Dev). Currently building SkillBridge Pro to help students trade knowledge.</p>
+                </div>
+                <div class="profile-grid">
+                    <div class="profile-info-card">
+                        <h3><i class="fa-solid fa-award"></i> Skills I Teach</h3>
+                        <div class="tag-list" id="teach-skills">
+                            <span class="profile-tag">React.js</span>
+                            <span class="profile-tag">Node.js</span>
+                            <span class="profile-tag">Arduino Robotics</span>
+                            <span class="profile-tag">C++ Programming</span>
                         </div>
                     </div>
-                    <button id="edit-profile-btn" class="btn-upgrade" style="margin-top: 20px;">Edit Profile</button>
-                </section>
-            </main>
-        </div>
+                    <div class="profile-info-card">
+                        <h3><i class="fa-solid fa-lightbulb"></i> What I want to Learn</h3>
+                        <div class="tag-list" id="learn-skills">
+                            <span class="profile-tag learn">Python ML</span>
+                            <span class="profile-tag learn">UI/UX Design</span>
+                        </div>
+                    </div>
+                    <div class="profile-info-card full-width">
+                        <h3><i class="fa-solid fa-user-astronaut"></i> About Me</h3>
+                        <p id="profile-about">I am a passionate CS student focused on bridging the gap between hardware
+                            (Robotics) and software (Full-stack Web Dev). Currently building SkillBridge Pro to help
+                            students trade knowledge.</p>
+                    </div>
+                </div>
+                <button id="edit-profile-btn" class="btn-upgrade" style="margin-top: 20px;">Edit Profile</button>
+            </section>
+
+            <section id="edit-profile-section" style="display: none;">
+                <h2 class="section-title">Edit Your Profile</h2>
+                <div class="edit-form-card">
+                    <div class="form-group">
+                        <label for="edit-name">Full Name</label>
+                        <input type="text" id="edit-name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="degree">Degree</label>
+                        <input type="text" id="edit-degree" placeholder="e.g. B.Tech CS Student">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-offered">Offered Skill</label>
+                        <select id="edit-offered"
+                            style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; font-size: 14px; box-sizing: border-box; background-color: #fff;">
+                            <option value="" disabled selected>Select Offered Skill</option>
+                            <option value="C Programming">C Programming</option>
+                            <option value="C++ Programming">C++ Programming</option>
+                            <option value="Java">Java</option>
+                            <option value="Python">Python</option>
+                            <option value="Machine Learning">Machine Learning</option>
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Frontend Development">Frontend Development</option>
+                            <option value="Backend Development">Backend Development</option>
+                            <option value="Full-Stack Development">Full-Stack Development</option>
+                            <option value="Data Structures & Algorithms">Data Structures & Algorithms</option>
+                            <option value="Cloud Computing">Cloud Computing</option>
+                            <option value="Database Management Systems">Database Management Systems</option>
+                            <option value="Operating Systems">Operating Systems</option>
+                            <option value="Software Engineering">Software Engineering</option>
+                            <option value="AI/ML">AI/ML</option>
+                            <option value="Competitive Programming">Competitive Programming</option>
+                            <option value="API Development & Integration">API Development & Integration</option>
+                            <option value="Blockchain">Blockchain</option>
+                            <option value="UI/UX Design">UI/UX Design</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-required">Required Skill</label>
+                        <select id="edit-required"
+                            style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 10px; font-family: inherit; font-size: 14px; box-sizing: border-box; background-color: #fff;">
+                            <option value="" disabled selected>Select Required Skill</option>
+                            <option value="C Programming">C Programming</option>
+                            <option value="C++ Programming">C++ Programming</option>
+                            <option value="Java">Java</option>
+                            <option value="Python">Python</option>
+                            <option value="Machine Learning">Machine Learning</option>
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Frontend Development">Frontend Development</option>
+                            <option value="Backend Development">Backend Development</option>
+                            <option value="Full-Stack Development">Full-Stack Development</option>
+                            <option value="Data Structures & Algorithms">Data Structures & Algorithms</option>
+                            <option value="Cloud Computing">Cloud Computing</option>
+                            <option value="Database Management Systems">Database Management Systems</option>
+                            <option value="Operating Systems">Operating Systems</option>
+                            <option value="Software Engineering">Software Engineering</option>
+                            <option value="AI/ML">AI/ML</option>
+                            <option value="Competitive Programming">Competitive Programming</option>
+                            <option value="API Development & Integration">API Development & Integration</option>
+                            <option value="Blockchain">Blockchain</option>
+                            <option value="UI/UX Design">UI/UX Design</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-place">Place</label>
+                        <input type="text" id="edit-place" placeholder="e.g. Delhi">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-age">Date of Birth</label>
+                        <input type="date" id="edit-age" placeholder="e.g. yyyy-mm-dd">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-about">About Me</label>
+                        <textarea id="edit-about" rows="5" placeholder="Tell us more about yourself..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button id="save-profile-btn" class="btn-upgrade">Save Changes</button>
+                        <button id="cancel-edit-btn" class="btn-cancel">Cancel</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
     </div>
 
     <script src="profile.js"></script>
 </body>
+
 </html>
