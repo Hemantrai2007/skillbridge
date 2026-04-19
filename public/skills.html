@@ -28,12 +28,12 @@
         <option>C++ Programming</option>
         <option>Java</option>
         <option>Python</option>
+        <option>Data Structures & Algorithms</option>
         <option>Machine Learning</option>
         <option>Cybersecurity</option>
         <option>Frontend Development</option>
         <option>Backend Development</option>
         <option>Full-Stack Development</option>
-        <option>Data Structures & Algorithms</option>
         <option>Cloud Computing</option>
         <option>Database Management Systems</option>
         <option>Operating Systems</option>
@@ -62,19 +62,19 @@
             <label><input type="checkbox" value="C++ Programming"><span>C++ Programming</span></label>
             <label><input type="checkbox" value="Java"><span>Java</span></label>
             <label><input type="checkbox" value="Python"><span>Python</span></label>
-            <label><input type="checkbox" value="DSA"><span>Data Structures & Algorithms</span></label>
+            <label><input type="checkbox" value="Data Structures & Algorithms"><span>Data Structures & Algorithms</span></label>
             <label><input type="checkbox" value="Machine Learning"><span>Machine Learning</span></label>
             <label><input type="checkbox" value="Cybersecurity"><span>Cybersecurity</span></label>
-            <label><input type="checkbox" value="Frontend"><span>Frontend Development</span></label>
-            <label><input type="checkbox" value="Backend"><span>Backend Development</span></label>
-            <label><input type="checkbox" value="Full Stack"><span>Full Stack Development</span></label>
-            <label><input type="checkbox" value="Cloud"><span>Cloud Computing</span></label>
-            <label><input type="checkbox" value="DBMS"><span>Database Management Systems</span></label>
-            <label><input type="checkbox" value="OS"><span>Operating Systems</span></label>
-            <label><input type="checkbox" value="SE"><span>Software Engineering</span></label>
+            <label><input type="checkbox" value="Frontend Development"><span>Frontend Development</span></label>
+            <label><input type="checkbox" value="Backend Development"><span>Backend Development</span></label>
+            <label><input type="checkbox" value="Full Stack Development"><span>Full Stack Development</span> </label>
+            <label><input type="checkbox" value="Cloud Computing"><span>Cloud Computing</span></label>
+            <label><input type="checkbox" value="Database Management Systems"><span>Database Management Systems</span></label>
+            <label><input type="checkbox" value="Operating Systems"><span>Operating Systems</span></label>
+            <label><input type="checkbox" value="Software Engineering"><span>Software Engineering</span></label>
             <label><input type="checkbox" value="AI/ML"><span>AI/ML</span></label>
             <label><input type="checkbox" value="Competitive Programming"><span>Competitive Programming</span></label>
-            <label><input type="checkbox" value="API"><span>API Development</span></label>
+            <label><input type="checkbox" value="API Development & Integration"><span>API Development & Integration</span></label>
             <label><input type="checkbox" value="Blockchain"><span>Blockchain</span></label>
             <label><input type="checkbox" value="UI/UX"><span>UI/UX Design</span></label>
             <label><input type="checkbox" id="otherCheck" value="Other" onclick="toggleOtherInput()"><span>Other</span></label>
@@ -108,11 +108,24 @@ window.onload = function () {
 function checkOther(type) {
     if (type === 'required') {
         let val = document.getElementById("requiredSkill").value;
+
         document.getElementById("requiredOther").style.display = val === "other" ? "block" : "none";
-    }
-    if (type === 'offered') {
-        let val = document.getElementById("offeredSkill").value;
-        document.getElementById("offeredOther").style.display = val === "other" ? "block" : "none";
+
+        const checkboxes = document.querySelectorAll('#checkboxList input[type="checkbox"]');
+
+        checkboxes.forEach(box => {
+            let skillText = box.nextElementSibling?.innerText;
+
+            if (skillText === val) {
+                box.checked = false;         
+                box.disabled = true;         
+                box.parentElement.style.opacity = "0.5"; 
+            } else {
+                box.disabled = false;
+                box.parentElement.style.opacity = "1";
+            }
+        });
+        updateSelectedSkills();
     }
 }
 
@@ -166,19 +179,11 @@ function updateSelectedSkills() {
     }
 }
 
-async function saveSkills() {
-    const requiredValue =
-    document.getElementById("requiredSkill").value;
+function saveSkills() {
 
-    
-    if(requiredValue === "other"){
-        requiredValue =
-        document.getElementById("requiredOther").value.trim();
-}
-    const offered =
-      document.querySelectorAll(
-        '#checkboxList input[type="checkbox"]:checked'
-      );
+   const requiredValue = document.getElementById("requiredSkill").value;
+
+    const offered = document.querySelectorAll('#checkboxList input[type="checkbox"]:checked');
     let offeredValues = [];
 
     offered.forEach(skill => {
