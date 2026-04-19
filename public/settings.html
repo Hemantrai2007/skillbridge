@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Settings</title>
+<script src="theme.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="settings.css">
 </head>
@@ -11,7 +12,7 @@
 <body>
 <nav class="side-nav">
     <div class="side-nav-top">
-        <a href="profile.html" class="nav-profile-circle">NV</a>
+        <a href="profile.html" class="nav-profile-circle">N</a>
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-layer-group"></i>
             <span class="nav-label">Dashboard</span>
@@ -64,7 +65,7 @@
         <h2>Appearance</h2>
         <div class="setting-item">
             <span>Dark Mode</span>
-            <div class="toggle" onclick="toggleDarkMode(this)"></div>
+            <div class="toggle" id="dark-mode-toggle" onclick="toggleDarkMode(this)"></div>
         </div>
     </div>
 
@@ -79,7 +80,6 @@
             <div class="toggle" onclick="toggleSwitch(this, 'showEmail')"></div>
         </div>
     </div>
-
 </div>
 
 <script>
@@ -87,28 +87,22 @@ function toggleSwitch(el, key) {
     el.classList.toggle("active");
     localStorage.setItem(key, el.classList.contains("active"));
 }
-function toggleDarkMode(el) {
-    el.classList.toggle("active");
-    document.body.classList.toggle("light-mode");
-    localStorage.setItem("darkMode", el.classList.contains("active"));
-}
 
 window.onload = () => {
     ["emailNotif", "msgNotif", "visibility", "showEmail"].forEach(key => {
-        if (localStorage.getItem(key) === "true") {
-            document.querySelectorAll(".toggle").forEach(t => {
-                if (t.getAttribute("onclick")?.includes(key)) {
-                    t.classList.add("active");
-                }
-            });
-        }
+        document.querySelectorAll(".toggle").forEach(t => {
+            if (t.getAttribute("onclick")?.includes(key) && localStorage.getItem(key) === "true") {
+                t.classList.add("active");
+            }
+        });
     });
-
+    
     if (localStorage.getItem("darkMode") === "true") {
-        document.body.classList.add("light-mode");
+        document.getElementById("dark-mode-toggle").classList.add("active");
     }
 };
 
+<<<<<<< HEAD
 function logout() {
     console.log("In log out function");
     setTimeout(()=>{
@@ -125,5 +119,11 @@ function deleteAccount() {
         alert("Connect Firebase delete here");
     }
 }
+=======
+function logout() { alert("Connect Firebase logout here"); }
+function changePassword() { alert("Connect Firebase password change here"); }
+function deleteAccount() { if (confirm("Are you sure?")) { alert("Connect Firebase delete here"); } }
+>>>>>>> skills-requirements
 </script>
+</body>
 </html>
