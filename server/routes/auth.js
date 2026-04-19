@@ -214,7 +214,7 @@ router.post("/edit_profile", async(req,res) =>{
   try{
     const {user_name,email,age,requiredSkills,offeredSkills,about_user,place,degree}=req.body;
     const user = await user_info.findOne({email});
-    console.log(typeof(requiredSkills),typeof(offeredSkills));
+   
     if(user){
       user["user_name"]=user_name;
       user["age"]=age;
