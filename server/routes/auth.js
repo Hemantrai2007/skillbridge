@@ -257,35 +257,34 @@ router.post("/edit_profile", async(req,res) =>{
   }
 });
 
-
-
-router.delete("/delete_account", async (req,res)=>{
-    try{
-      const {email}=req.body;
-
-      const deleteUser = await user_info.findOneAndDelete({email});
-      console.log(deleteUser);
-      if(deleteUser){
-        return res.status(200).json({
-          success:true,
-          message:"Account deleted successfully"
-        });
-
-      }
-      else{
-        res.status(500).json({
-          success:false,
-          message:"User not found"
-        });
-      }
-    }
-    catch(error){
-      res.status(500).json({
-        success:false,
-        message:"Server Error"
-      });
-    }
+// Get all matches with skills
+router.get("/matches", async (req, res) => {
+  try {
+    const users = await user_info.find({}, { password: 0, otp: 0 });
+    
+    const matches = users.map(user => ({
+      _id: user._id,
+      name: user.user_name,
+      age: user.age || "N/A",
+      teaches: user.offeredSkills || [],
+      bio: user.about_user || "SkillBridge learner",
+      location: user.place || "N/A",
+      email: user.email,
+      wants: user.requiredSkills || []
+    }));
+    
+    res.status(200).json({
+      success: true,
+      matches: matches
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
 });
+
 
 
 export const auth_router = router;
