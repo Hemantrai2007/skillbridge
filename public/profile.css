@@ -8,6 +8,14 @@
     --success: #28a745;
     --pro: #ffd700;
 }
+.notification-wrapper {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.notification-wrapper:hover {
+  transform: scale(1.1);
+}
 
 body { 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 

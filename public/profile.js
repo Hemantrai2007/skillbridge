@@ -251,7 +251,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+const bellIcon = document.getElementById("bellIcon");
 
+if (bellIcon) {
+    bellIcon.addEventListener("click", () => {
+        window.location.href = "request.html";
+    });
+}
     
 
     // =========================

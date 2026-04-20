@@ -1,11 +1,50 @@
-:root { 
+style me kha kru :root { 
     --primary: #d9243d; 
     --dark: #121826; 
     --text: #333; 
     --gray-bg: #f8f9fa;
     --border: #eef0f2;
 }
+.notification-wrapper:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+.fa-bell {
+    cursor: pointer;
+}
+/* =========================
+   SIDEBAR TAB BASE STYLE
+========================= */
 
+.nav-item {
+    color: #a1a1aa;   /* default grey */
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+/* Hover effect */
+.nav-item:hover {
+    color: #6366f1;
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* ACTIVE TAB (THIS IS MAIN CHANGE) */
+.nav-item.active {
+    color: white;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
+}
+.back {
+  font-size: 22px;
+  color: black;
+  cursor: pointer;
+  margin-right: 10px;
+}
 body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background: var(--gray-bg); color: var(--text); overflow-x: hidden; }
 
 /* SIDEBAR */

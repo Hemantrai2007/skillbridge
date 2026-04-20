@@ -36,7 +36,7 @@
             </div>
             <div class="top-bar-actions">
                 <div class="notification-wrapper">
-                    <i class="fa-regular fa-bell"></i>
+                    <i class="fa-regular fa-bell" onclick="openRequests()"></i>
                     <span class="pulse-dot"></span>
                 
         </header>
@@ -61,5 +61,10 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+function openRequests(){
+    window.location.href = "request.html";
+}
+</script>
 </body>
-</html>
+</html>   
