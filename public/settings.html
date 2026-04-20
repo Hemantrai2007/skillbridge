@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Settings</title>
+<script src="theme.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="settings.css">
 </head>
@@ -11,7 +12,7 @@
 <body>
 <nav class="side-nav">
     <div class="side-nav-top">
-        <a href="profile.html" class="nav-profile-circle">NV</a>
+        <a href="profile.html" class="nav-profile-circle" id="userCircle">NV</a>
         <a href="index.html" class="nav-item">
             <i class="fa-solid fa-layer-group"></i>
             <span class="nav-label">Dashboard</span>
@@ -34,10 +35,7 @@
 
     <div class="section">
         <h2>Security</h2>
-        <div class="setting-item">
-            <span>Change Password</span>
-            <button class="btn" onclick="changePassword()">Change</button>
-        </div>
+        
         <div class="setting-item">
             <span>Logout</span>
             <button class="btn" onclick="logout()">Logout</button>
@@ -64,19 +62,7 @@
         <h2>Appearance</h2>
         <div class="setting-item">
             <span>Dark Mode</span>
-            <div class="toggle" onclick="toggleDarkMode(this)"></div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Privacy</h2>
-        <div class="setting-item">
-            <span>Profile Visibility</span>
-            <div class="toggle" onclick="toggleSwitch(this, 'visibility')"></div>
-        </div>
-        <div class="setting-item">
-            <span>Show Email</span>
-            <div class="toggle" onclick="toggleSwitch(this, 'showEmail')"></div>
+            <div class="toggle" id="dark-mode-toggle" onclick="toggleDarkMode(this)"></div>
         </div>
     </div>
 
@@ -87,40 +73,90 @@ function toggleSwitch(el, key) {
     el.classList.toggle("active");
     localStorage.setItem(key, el.classList.contains("active"));
 }
-function toggleDarkMode(el) {
-    el.classList.toggle("active");
-    document.body.classList.toggle("light-mode");
-    localStorage.setItem("darkMode", el.classList.contains("active"));
-}
 
 window.onload = () => {
     ["emailNotif", "msgNotif", "visibility", "showEmail"].forEach(key => {
-        if (localStorage.getItem(key) === "true") {
-            document.querySelectorAll(".toggle").forEach(t => {
-                if (t.getAttribute("onclick")?.includes(key)) {
-                    t.classList.add("active");
-                }
-            });
-        }
+        document.querySelectorAll(".toggle").forEach(t => {
+            if (t.getAttribute("onclick")?.includes(key) && localStorage.getItem(key) === "true") {
+                t.classList.add("active");
+            }
+        });
     });
-
+    
     if (localStorage.getItem("darkMode") === "true") {
-        document.body.classList.add("light-mode");
+        document.getElementById("dark-mode-toggle").classList.add("active");
     }
 };
 
 function logout() {
-    alert("Connect Firebase logout here");
+    console.log("In log out function");
+    setTimeout(()=>{
+        window.location.href="signin.html";
+    },1000);
 }
 
 function changePassword() {
     alert("Connect Firebase password change here");
 }
 
-function deleteAccount() {
-    if (confirm("Are you sure?")) {
-        alert("Connect Firebase delete here");
-    }
+async function deleteAccount() {
+   const email = localStorage.getItem("gmail");
+
+        if (!email) {
+            alert("Please login first");
+            window.location.href = "signin.html";
+            return;
+        }
+
+        try{
+
+            const res = await fetch("http://localhost:8000/auth/delete_account",
+            {
+                method :"DELETE",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({ email })
+             }
+            );
+            const data = await res.json();
+
+            if(data.success){
+                console.log("Account Deleted successfully");
+                alert("Account Deleted successfully");
+                setTimeout(()=>{
+                    window.location.href="signup.html";
+                },1000);
+            }else{
+                console.log(data.message);
+                alert("some issue in deleting");
+            }
+
+        }catch(error){
+            alert("Server Issue");
+        }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    updateUserCircle();
+});
+
+function updateUserCircle() {
+    const username = localStorage.getItem("username");
+    const circle = document.getElementById("userCircle");
+
+    if (!username || !circle) return;
+
+    const initials = username
+        .trim()
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .substring(0, 2)
+        .toUpperCase();
+
+    circle.textContent = initials;
 }
 </script>
+</body>
 </html>

@@ -22,6 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const teachSkillsContainer = document.getElementById("teach-skills");
     const learnSkillsContainer = document.getElementById("learn-skills");
 
+    const editOffered = document.getElementById("edit-offered");
+
+    if (editOffered) {
+        editOffered.addEventListener("change", syncRequiredFromOffered);
+    }
+
     
 
 
@@ -47,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Email
         profileBio.innerHTML =
-            ` ${user.degree} || ${user.place} || <i class="fa-solid fa-envelope"></i> ${user.email}`;
+            ` ${user.degree} || ${user.place} || <i class="fa-solid fa-envelope"></i> ${user.email} || +91${user.contact}`;
 
         // Initials
         const initials = getInitials(user.user_name);
@@ -130,6 +136,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    function syncRequiredFromOffered() {
+    const offered = document.getElementById("edit-offered").value;
+    const requiredSelect = document.getElementById("edit-required");
+
+    for (let option of requiredSelect.options) {
+        if (option.value === offered) {
+            option.disabled = true;
+        } else {
+            option.disabled = false;
+        }
+    }
+}
+
     // =========================
     // NAVIGATION
     // =========================
@@ -193,6 +212,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const offeredSkills = [
         document.getElementById("edit-offered").value
     ];
+
+    const contact = document.getElementById("edit-no.").value;
     
 
     const dob =
@@ -229,7 +250,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     offeredSkills,
                     about_user,
                     place,
-                    degree
+                    degree,
+                    contact
                 })
             }
         );
@@ -237,6 +259,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await res.json();
 
         if(data.success){
+            const value=user_name;
+            localStorage.setItem("username",value);
             loadProfile();
             setTimeout(()=>{
                 location.reload();

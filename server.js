@@ -29,7 +29,7 @@ const users = [
     }
 ];
 
-// The "Jeevansathi" Matching Algorithm
+
 app.get('/api/matches/:id', (req, res) => {
     const currentUser = users.find(u => u.id === parseInt(req.params.id));
     if (!currentUser) return res.status(404).json({ error: "User not found" });
@@ -56,63 +56,8 @@ app.get('/api/matches/:id', (req, res) => {
 
     res.json(matches);
 });
-// Add this BELOW your users array
 
-// Signup API
-app.post('/signup', (req, res) => {
-    const { name, email, password } = req.body;
 
-    // Basic validation
-    if (!name || !email || !password) {
-        return res.status(400).send("All fields required");
-    }
-
-    // Check duplicate email (basic)
-    const existingUser = users.find(u => u.email === email);
-    if (existingUser) {
-        return res.status(400).send("User already exists");
-    }
-
-    // Create new user
-    const newUser = {
-        id: users.length + 1,
-        name,
-        email,
-        password,
-        teaches: [],
-        wants: [],
-        location: "",
-        bio: "",
-        verified: false
-    };
-
-    users.push(newUser);
-
-    console.log("New User:", newUser);
-
-    res.send("Signup successful!");
-});
-app.post('/signin', (req, res) => {
-    const { email, password } = req.body;
-
-    // 🔍 1. Check if user exists
-    const user = users.find(u => u.email === email);
-
-    if (!user) {
-        return res.status(400).json({ message: "User not found" });
-    }
-
-    // 🔐 2. Check password
-    if (user.password !== password) {
-        return res.status(400).json({ message: "Invalid password" });
-    }
-
-    // ✅ 3. Success
-    res.json({
-        message: "Login successful",
-        user
-    });
-});
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`🚀 Advanced Server: http://localhost:${PORT}`));

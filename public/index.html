@@ -4,27 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillBridge Pro | Dashboard</title>
+    <script src="theme.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="index-styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <nav class="side-nav">
         <div class="side-nav-top">
-            <a href="profile.html" class="nav-profile-circle" title="My Profile">HR</a>
-            <hr class="nav-divider">
-            <a href="index.html" class="nav-item active" id="nav-matches" title="Matches">
+            <div class="nav-profile-circle active" id="nav-profile-initials">N</div>
+    
+            <a href="index.html" class="nav-item active" id="nav-matches">
                 <i class="fa-solid fa-layer-group"></i>
+                <span class="nav-label">Dashboard</span>
             </a>
-            <a href="chat.html" class="nav-item" id="nav-inbox" title="Inbox">
+            <a href="chat.html" class="nav-item" id="nav-inbox">
                 <i class="fa-solid fa-message"></i>
+                <span class="nav-label">Chat</span>
             </a>
         </div>
         <div class="sidebar-bottom">
-            <a href="settings.html" title="Settings">
-                <i class="fa-solid fa-gear"></i>
-            </a>
-    </div>
+                <a href="settings.html" class="nav-item" id="nav-settings">
+                    <i class="fa-solid fa-gear"></i>
+                    <span class="nav-label">Settings</span>
+                </a>
+        </div>
     </nav>
 
     <div class="main-wrapper">
@@ -38,26 +44,99 @@
                 <div class="notification-wrapper">
                     <i class="fa-regular fa-bell" onclick="openRequests()"></i>
                     <span class="pulse-dot"></span>
-                
+                </div>
+            </div>
         </header>
 
-        <div class="container">
-            <aside class="sidebar-left">
-                <div class="card profile-mini">
-                    <h3 style="margin:0;">Hemant Rai</h3>
-                    <p style="color:#666; font-size:14px;">B.Tech CS Student</p>
-                    <div class="badge">Verified</div>
-                </div>
-            </aside>
+        <main id="main-content-area">
+                <!-- Welcome Section -->
 
-            <main id="main-content-area">
-                <section id="match-feed-view">
+        <script>
+        // Highlight sidebar nav based on current page
+        const path = window.location.pathname.split("/").pop();
+        document.querySelectorAll('.nav-item').forEach(link => {
+            if (link.getAttribute('href') && path === link.getAttribute('href')) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+        </script>
+                <section id="welcome-section" class="section welcome-section-container" style="display: block;">
+                    <div class="welcome-header-row">
+                        <div class="welcome-left">
+                            <h1 class="welcome-title">Welcome Back, <span id="user-name">User</span>! 👋</h1>
+                            <p class="welcome-subtitle" id="completion-suggestion">Sign in to see your profile and get personalized matches.</p>
+                            <p class="welcome-academic">Learning Skills • Sharing Knowledge • Growing Together</p>
+                        </div>
+                    </div>
+
+                    <div class="progress-bar-large">
+                        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+
+                        <!-- Profile Completion Percent (for JS update)-->
+                        <p style="font-size: 22px; font-weight: 700; color: #e8294a; margin: 12px 0 0;" id="completion-percent">0</p>
+                    
+                    <div class="welcome-suggestions">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Next Steps</h3>
+                        <ul id="suggestions-list">
+                            <li>Complete your profile</li>
+                            <li>Add more skills</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Stats Section -->
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #ffe8ec 0%, #ffccda 100%);">
+                            <i class="fa-solid fa-chart-line" style="color: #e8294a;"></i>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Profile Status</p>
+                            <p class="stat-value" id="stat-profile">0%</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #ffe8ec 0%, #ffccda 100%);">
+                            <i class="fa-solid fa-star" style="color: #e8294a;"></i>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Skills I Have</p>
+                            <p class="stat-value" id="stat-offered">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #ffe8ec 0%, #ffccda 100%);">
+                            <i class="fa-solid fa-lightbulb" style="color: #e8294a;"></i>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Skills Required</p>
+                            <p class="stat-value" id="stat-required">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #ffe8ec 0%, #ffccda 100%);">
+                            <i class="fa-solid fa-trophy" style="color: #e8294a;"></i>
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Skills Learned</p>
+                            <p class="stat-value" id="stat-learned">0</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Matches Section (Hidden initially) -->
+                <section id="match-feed-view" class="section" style="display: none;">
                     <h2 class="section-title">New Matches for You</h2>
                     <div id="loader" class="loader">Calculating Compatibility...</div>
                     <div id="matches-container"></div>
                 </section>
-            </main>
-        </div>
+        </main>
     </div>
 
     <script src="app.js"></script>

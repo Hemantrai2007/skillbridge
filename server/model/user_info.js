@@ -10,6 +10,7 @@ const user_info_schema=new mongoose.Schema({
   about_user:{type:String, default:"SkillBridge learner ready to exchange skills."},
   degree:{type:String},
   age:{type:String},
-  place:{type:String}
+  place:{type:String},
+  contact:{type:String}
 },{timestamps:true});
 export const user_info= mongoose.model("user_info",user_info_schema);

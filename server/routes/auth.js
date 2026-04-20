@@ -212,7 +212,7 @@ router.post("/profile",async(req,res) => {
 router.post("/edit_profile", async(req,res) =>{
 
   try{
-    const {user_name,email,age,requiredSkills,offeredSkills,about_user,place,degree}=req.body;
+    const {user_name,email,age,requiredSkills,offeredSkills,about_user,place,degree,contact}=req.body;
     const user = await user_info.findOne({email});
    
     if(user){
@@ -221,6 +221,7 @@ router.post("/edit_profile", async(req,res) =>{
       user["about_user"]=about_user;
       user["degree"]=degree;
       user["place"]=place;
+      user["contact"]=contact;
       (requiredSkills).forEach(skill => {
       if (!user["requiredSkills"].includes(skill)) {
         user["requiredSkills"].push(skill);
@@ -253,6 +254,34 @@ router.post("/edit_profile", async(req,res) =>{
         success:false,
         message:"Server hello error"
       });
+  }
+});
+
+// Get all matches with skills
+router.get("/matches", async (req, res) => {
+  try {
+    const users = await user_info.find({}, { password: 0, otp: 0 });
+    
+    const matches = users.map(user => ({
+      _id: user._id,
+      name: user.user_name,
+      age: user.age || "N/A",
+      teaches: user.offeredSkills || [],
+      bio: user.about_user || "SkillBridge learner",
+      location: user.place || "N/A",
+      email: user.email,
+      wants: user.requiredSkills || []
+    }));
+    
+    res.status(200).json({
+      success: true,
+      matches: matches
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
   }
 });
 
